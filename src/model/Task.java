@@ -1,18 +1,29 @@
 package model;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Task {
     private boolean priority;
     private String title;
     private String description;
-    private Calendar deadLine;
+    private String deadLine;
+    
+    private final String imgSrc;
+    
+    //private SimpleDateFormat format;
 
-    public Task(String title, String description, Calendar deadLine, boolean priority){
+    public String getDead(){
+        return deadLine;
+    }
+    
+    public Task(String title, String description, String deadLine, boolean priority){
         this.title = title;
         this.priority = priority;
         this.deadLine = deadLine;
         this.description = description;
+        //format = new SimpleDateFormat("dd--mm-yyyy");
+        imgSrc = ("/img/edit.png");
     }
 
     public boolean isPriority() {
@@ -38,14 +49,25 @@ public class Task {
     public void setDescription(String description) {
         this.description = description;
     }
+    
+    //public Calendar getDeadLine() {
+      //  return deadLine;
+    //}
 
-    public Calendar getDeadLine() {
-        return deadLine;
-    }
-
+    /**
     public void setDeadLine(Calendar deadLine) {
         this.deadLine = deadLine;
     }
-
     
+    public String getSimpleCalendar(){
+        return format.format(deadLine);
+    }
+    */
+    public String getImgSrc(){
+        return imgSrc;
+    }
+    
+    public String getPriority(){
+        return priority ? "Priority" : "Non-priority";
+    }
 }
