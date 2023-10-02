@@ -1,23 +1,18 @@
 package model;
 
-import java.text.SimpleDateFormat;
-import java.util.*;
+import java.time.LocalDate;
 
 public class Task {
     private boolean priority;
     private String title;
-    private String description;
-    private String deadLine;
+    private String description;    
+    
+    private LocalDate deadLine;
     
     private final String imgSrc;
     
-    //private SimpleDateFormat format;
-
-    public String getDead(){
-        return deadLine;
-    }
     
-    public Task(String title, String description, String deadLine, boolean priority){
+    public Task(String title, String description, LocalDate deadLine, boolean priority){
         this.title = title;
         this.priority = priority;
         this.deadLine = deadLine;
@@ -50,19 +45,18 @@ public class Task {
         this.description = description;
     }
     
-    //public Calendar getDeadLine() {
-      //  return deadLine;
-    //}
-
-    /**
-    public void setDeadLine(Calendar deadLine) {
-        this.deadLine = deadLine;
+    public void setDeadLine(LocalDate d){
+        this.deadLine = d;
     }
     
-    public String getSimpleCalendar(){
-        return format.format(deadLine);
+    public LocalDate getDeadLine(){
+        return deadLine;
     }
-    */
+    
+    public String getDeadLineToString(){
+        return deadLine.toString();
+    }
+    
     public String getImgSrc(){
         return imgSrc;
     }

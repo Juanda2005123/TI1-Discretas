@@ -10,7 +10,7 @@
 
 <HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="498.0" spacing="5.0" styleClass="light-black-background" stylesheets="@../values/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Task_itemController">
    <children>
-      <Button mnemonicParsing="false" styleClass="buttonRound" stylesheets="@../values/styles.css">
+      <Button fx:id="editButton" mnemonicParsing="false" onAction="#editTask" styleClass="buttonRound" stylesheets="@../values/styles.css">
          <graphic>
             <ImageView fx:id="editButtonImg" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
