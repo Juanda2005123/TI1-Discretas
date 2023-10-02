@@ -18,7 +18,6 @@ public class IntegradoraDiscretas1 extends Application {
         
         Parent root = FXMLLoader.load(getClass().getResource("/vista/tasksMain.fxml"));
         
-        
         primaryStage.setTitle("Tasks");
         primaryStage.setScene(new Scene(root, 500, 800));
         primaryStage.show();

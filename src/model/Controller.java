@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
+import javafx.event.ActionEvent;
 
 
 
@@ -17,6 +18,7 @@ import javafx.scene.layout.HBox;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.ArrayList;
+import javafx.scene.control.Button;
 //import util.HashTable;
 
 public class Controller implements Initializable{
@@ -25,6 +27,14 @@ public class Controller implements Initializable{
     @FXML
     private VBox tasksLayout;
     
+    @FXML
+    private Button addTask;
+
+    @FXML
+    private Button backButton;
+    
+    @FXML
+    private Button filterTasks;
     //private HashTable tasks;
 
 
@@ -67,7 +77,35 @@ public class Controller implements Initializable{
         }
         
     }
-
+    
+    @FXML
+    public void addTaskAction(ActionEvent event) {
+        
+        Task newTask = new Task("Prueba Boton Add", "Es una tarea interesante", "3-10-2023", false);
+        
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));
+    
+        try{
+            HBox hBox = fxmlLoader.load();
+            Task_itemController tic = fxmlLoader.getController();
+            tic.setData(newTask);
+            tasksLayout.getChildren().add(hBox);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
+    @FXML
+    public void filterTasks(ActionEvent event) {
+        if(filterTasks.getText().equalsIgnoreCase("DeadLine")){
+            filterTasks.setText("Priority");
+        } else {
+            filterTasks.setText("DeadLine");
+        }
+        
+    }
     
     private ArrayList<Task> tasks2(){
         
@@ -80,9 +118,15 @@ public class Controller implements Initializable{
         Task newTask2 = new Task("Parcial Software", "Es para la otra semana", "30-11-2024", true);
         tasks2.add(newTask2);
         
+        Task newTask3 = new Task("Parcial teoria", "Es para la otra semana", "8-10-2027", true);
+        tasks2.add(newTask3);
+        
         return tasks2;
         
     }
+
+    
+ 
     
     
 
