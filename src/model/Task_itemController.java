@@ -47,7 +47,8 @@ public class Task_itemController implements Initializable {
     
     public void setData(Task task){
         
-        var img = new Image(getClass().getResourceAsStream(task.getImgSrc()));
+        Image img = new Image(getClass().getResourceAsStream(task.getImgSrc()));
+        
         editButtonImg.setImage(img);
         
         title.setText(task.getTitle());

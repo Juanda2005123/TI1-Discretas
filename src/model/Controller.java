@@ -60,6 +60,7 @@ public class Controller implements Initializable{
                 HBox hBox = fxmlLoader.load();
                 Task_itemController tic = fxmlLoader.getController();
                 tic.setData(tasks.get(i));
+                tasksLayout.getChildren().add(hBox);
             } catch(IOException e) {
                 e.printStackTrace();
             }
