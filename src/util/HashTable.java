@@ -1,14 +1,13 @@
 package util;
 
-import java.util.ArrayList;
 import model.Task;
 
 public class HashTable {
 
-    private ArrayList<Node> hashTable;
+    private Node[] hashTable;
 
     public HashTable() {
-        hashTable = new ArrayList<>(23); //A siempre ganar como el 23
+        hashTable = new Node[23]; //A siempre ganar como el 23
     }
 
     public int hashFunction(String key){ //Title
@@ -26,21 +25,21 @@ public class HashTable {
         Node node = new Node(newTask);
         int key = hashFunction(newTask.getTitle());
 
-        if(hashTable.get(key)==null){
-            hashTable.set(key, node);
+        if(hashTable[key]==null){
+            hashTable[key] = node;
         } else{
-            hashTable.get(key).addNewNode(node);
+            hashTable[key].addNewNode(node);
         }
     }
 
     public void remove(Task value) {
         int key = hashFunction(value.getTitle());
 
-        Node temp = hashTable.get(key);
+        Node temp = hashTable[key];
 
         if(temp!=null){
             if(temp.getValue()==value){
-                hashTable.set(key, temp.getNext());
+                hashTable[key] = temp.getNext();
             } else {
                 temp.removeNode(value);
             }

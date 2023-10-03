@@ -29,7 +29,7 @@ public class NewModifyTaskController implements Initializable {
     
     @FXML
     private ChoiceBox<String> priorityChoiceBox;
-    private String[] options = {"Prioritary", "Non-priority"};
+    private String[] options = {"NON PRORITY", "LOW PRIORITY", "MEDIUM PRIORITY", "HIGH PRIORITY", "IMMEDIATE PRIORITY"};
     
     @FXML
     private DatePicker deadLinePicker;
@@ -57,11 +57,9 @@ public class NewModifyTaskController implements Initializable {
         title.setText(task.getTitle());
         description.setText(task.getDescription());
         
-        if(task.isPriority()){
-            priorityChoiceBox.setValue(options[0]);
-        } else {
-            priorityChoiceBox.setValue(options[1]);
-        }
+        
+        priorityChoiceBox.setValue(task.priorityToString());
+        
         
         deadLinePicker.setValue(task.getDeadLine());
     }
@@ -71,7 +69,7 @@ public class NewModifyTaskController implements Initializable {
     private void submitData(ActionEvent event) {
         String newTitle = this.title.getText();
         String newDescription = this.description.getText();        
-        boolean priority = (priorityChoiceBox.getValue().equals(options[0]));
+        PriorityLevel priority = stringToPriorityLevel(priorityChoiceBox.getValue());
         LocalDate deadLine = deadLinePicker.getValue();
         
         Task newTask = new Task(newTitle, newDescription, deadLine, priority);
@@ -100,5 +98,19 @@ public class NewModifyTaskController implements Initializable {
         this.task = null;
         Stage stage = (Stage) this.submitButton.getScene().getWindow();
         stage.close();
+    }
+    
+    private PriorityLevel stringToPriorityLevel(String msg){
+        PriorityLevel p = PriorityLevel.NON;
+        if(msg.equals(options[1])){
+            p = PriorityLevel.LOW;
+        } else if(msg.equals(options[2])){
+            p = PriorityLevel.MEDIUM;
+        } else if(msg.equals(options[3])){
+            p = PriorityLevel.HIGH;
+        } else if(msg.equals(options[4])){
+            p = PriorityLevel.IMMEDIATE;
+        }
+        return p;
     }
 }

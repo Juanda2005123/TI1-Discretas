@@ -13,7 +13,7 @@
    <top>
       <HBox prefHeight="150.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <VBox prefHeight="150.0" prefWidth="265.0" spacing="10.0">
+            <VBox prefHeight="150.0" prefWidth="190.0" spacing="10.0">
                <children>
                   <Label text="Tasks" textFill="#788cdc">
                      <font>
@@ -28,6 +28,25 @@
                         <Insets left="35.0" top="10.0" />
                      </VBox.margin>
                   </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="150.0" prefWidth="312.0">
+               <children>
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+                  <HBox alignment="CENTER" prefHeight="80.0" prefWidth="311.0" spacing="20.0" styleClass="darker-light-black-background" stylesheets="@../values/styles.css">
+                     <children>
+                        <Button fx:id="finishPriority" mnemonicParsing="false" onAction="#finishPriorityTask" prefHeight="40.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="Finish priority">
+                           <HBox.margin>
+                              <Insets top="8.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button fx:id="finishNonPriority" mnemonicParsing="false" onAction="#finishNonPriorityTask" prefHeight="40.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="Finish non-priority">
+                           <HBox.margin>
+                              <Insets top="8.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
                </children>
             </VBox>
          </children>
@@ -74,7 +93,7 @@
                                     <Font name="Open Sans Regular" size="20.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="130.0" />
+                                    <Insets left="150.0" />
                                  </HBox.margin>
                               </Label>
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" text="Priority" textFill="#788cdc">
@@ -82,7 +101,7 @@
                                     <Font name="Open Sans Regular" size="20.0" />
                                  </font>
                                  <HBox.margin>
-                                    <Insets left="40.0" />
+                                    <Insets left="30.0" />
                                  </HBox.margin>
                               </Label>
                            </children>

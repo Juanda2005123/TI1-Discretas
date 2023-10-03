@@ -3,7 +3,7 @@ package model;
 import java.time.LocalDate;
 
 public class Task {
-    private boolean priority;
+    private PriorityLevel priority;
     private String title;
     private String description;    
     
@@ -12,7 +12,7 @@ public class Task {
     private final String imgSrc;
     
     
-    public Task(String title, String description, LocalDate deadLine, boolean priority){
+    public Task(String title, String description, LocalDate deadLine, PriorityLevel priority){
         this.title = title;
         this.priority = priority;
         this.deadLine = deadLine;
@@ -21,12 +21,21 @@ public class Task {
         imgSrc = ("/img/edit.png");
     }
 
-    public boolean isPriority() {
-        return priority;
-    }
+    public String priorityToString(){
 
-    public void setPriority(boolean priority) {
-        this.priority = priority;
+        String msg = "NON";
+
+        if(priority==PriorityLevel.LOW){
+            msg = "LOW";
+        } else if(priority==PriorityLevel.MEDIUM){
+            msg = "MEDIUM";
+        } else if(priority==PriorityLevel.HIGH){
+            msg = "HIGH";
+        } else if(priority==PriorityLevel.IMMEDIATE){
+            msg = "IMMEDIATE";
+        }
+        
+        return msg;
     }
 
     public String getTitle() {
@@ -61,7 +70,11 @@ public class Task {
         return imgSrc;
     }
     
-    public String getPriority(){
-        return priority ? "Priority" : "Non-priority";
+    public void setPriority(PriorityLevel priority) {
+        this.priority = priority;
+    }
+
+    public PriorityLevel getPriority() {
+        return priority;
     }
 }

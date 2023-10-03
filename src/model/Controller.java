@@ -36,9 +36,17 @@ public class Controller implements Initializable{
     
     @FXML
     private Button filterTasks;
+    @FXML
+    private Button finishPriority;
+    @FXML
+    private Button finishNonPriority;
+    
+    
+    
 
     //NORMAL
     private HashTable tasks;
+   
 
 
 
@@ -100,6 +108,14 @@ public class Controller implements Initializable{
             filterTasks.setText("DeadLine");
         }
         
+    }
+
+    @FXML
+    private void finishPriorityTask(ActionEvent event) {
+    }
+
+    @FXML
+    private void finishNonPriorityTask(ActionEvent event) {
     }
     
 

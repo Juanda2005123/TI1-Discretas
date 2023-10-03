@@ -18,7 +18,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -47,7 +46,7 @@ public class Task_itemController implements Initializable {
     
     private Task task;
     @FXML
-    private Button finishTaskButton;
+    private HBox hBox;
 
     
     
@@ -68,7 +67,7 @@ public class Task_itemController implements Initializable {
         editButtonImg.setImage(img);
         
         title.setText(task.getTitle());
-        prioritary.setText(task.getPriority());
+        prioritary.setText(task.priorityToString());
         deadLine.setText(task.getDeadLineToString());
         
         
@@ -91,7 +90,7 @@ public class Task_itemController implements Initializable {
             task = controllerEdit.getTask();
             
             title.setText(task.getTitle());
-            prioritary.setText(task.getPriority());
+            prioritary.setText(task.priorityToString());
             deadLine.setText(task.getDeadLineToString());
             
             
@@ -100,10 +99,6 @@ public class Task_itemController implements Initializable {
         }
     }
 
-    @FXML
-    private void finishTask(ActionEvent event) {
-        
-    }
     
    
     
