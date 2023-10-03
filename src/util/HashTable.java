@@ -8,7 +8,7 @@ public class HashTable {
     private ArrayList<Node> hashTable;
 
     public HashTable() {
-        hashTable = new ArrayList<>(23);
+        hashTable = new ArrayList<>(23); //A siempre ganar como el 23
     }
 
     public int hashFunction(String key){ //Title
@@ -17,7 +17,7 @@ public class HashTable {
         for(int i = 0; i < chars.length; i++){
             answer += chars[i];
         }
-        answer %= hashTable.size();
+        answer %= 23;
 
         return answer;
     }

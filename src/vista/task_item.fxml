@@ -8,13 +8,13 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<HBox alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="498.0" spacing="5.0" styleClass="light-black-background" stylesheets="@../values/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Task_itemController">
+<HBox fx:id="hBox" alignment="CENTER_LEFT" prefHeight="80.0" prefWidth="498.0" spacing="5.0" styleClass="light-black-background" stylesheets="@../values/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Task_itemController">
    <children>
-      <Button fx:id="editButton" mnemonicParsing="false" onAction="#editTask" styleClass="buttonRound" stylesheets="@../values/styles.css">
+      <Button fx:id="finishTaskButton" mnemonicParsing="false" onAction="#finishTask" styleClass="buttonRound" stylesheets="@../values/styles.css">
          <graphic>
-            <ImageView fx:id="editButtonImg" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/edit.png" />
+                  <Image url="@../img/finish.png" />
                </image>
             </ImageView>
          </graphic>
@@ -30,7 +30,7 @@
             <Insets left="5.0" />
          </HBox.margin>
       </Label>
-      <Label fx:id="deadLine" contentDisplay="CENTER" prefHeight="29.0" prefWidth="111.0" text="28-09-2023" textFill="#e1e1e1">
+      <Label fx:id="deadLine" contentDisplay="CENTER" prefHeight="29.0" prefWidth="120.0" text="28-09-2023" textFill="#e1e1e1">
          <font>
             <Font name="Open Sans Regular" size="14.0" />
          </font>
@@ -46,5 +46,17 @@
             <Insets left="20.0" />
          </HBox.margin>
       </Label>
+      <Button fx:id="editButton" mnemonicParsing="false" onAction="#editTask" styleClass="buttonRound" stylesheets="@../values/styles.css">
+         <graphic>
+            <ImageView fx:id="editButtonImg" fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/edit.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <HBox.margin>
+            <Insets right="5.0" />
+         </HBox.margin>
+      </Button>
    </children>
 </HBox>

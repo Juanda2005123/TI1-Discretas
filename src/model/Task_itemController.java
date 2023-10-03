@@ -12,15 +12,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-
-
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 
@@ -30,6 +28,8 @@ import javafx.stage.Stage;
  * @author Juan David Quintero
  */
 public class Task_itemController implements Initializable {
+    
+
 
     @FXML
     private Label deadLine;
@@ -46,6 +46,9 @@ public class Task_itemController implements Initializable {
     private Button editButton;
     
     private Task task;
+    @FXML
+    private Button finishTaskButton;
+
     
     
     /**
@@ -96,6 +99,15 @@ public class Task_itemController implements Initializable {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void finishTask(ActionEvent event) {
+        
+    }
+    
+   
+    
+
 
     
         
