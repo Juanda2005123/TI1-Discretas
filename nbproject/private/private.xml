@@ -5,10 +5,11 @@
         <group>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/PriorityLevel.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/Task_itemController.java</file>
-            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/util/Node.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/Task.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/DeleteAlertController.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/NewModifyTaskController.java</file>
+            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/util/DoubleLinkedNode.java</file>
+            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/util/FifoLinkedList.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/values/styles.css</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/Controller.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/integradoradiscretas1/IntegradoraDiscretas1.java</file>

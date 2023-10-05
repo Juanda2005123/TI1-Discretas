@@ -2,19 +2,19 @@ package util;
 
 import model.Task;
 
-public class Node {
+public class DoubleLinkedNode<T> {
     
-    private Node next;
-    private Node prev;
-    private Task value;
+    private DoubleLinkedNode<T> next;
+    private DoubleLinkedNode<T> prev;
+    private T value;
 
-    public Node(Task value){
+    public DoubleLinkedNode(T value){
         this.value = value;
         next = null;
         prev = null;
     }
 
-    public void addNewNode(Node node) {
+    public void addNewNode(DoubleLinkedNode<T> node) {
         if(this.next==null){
             node.setPrev(this);
             this.next = node;
@@ -23,8 +23,8 @@ public class Node {
         }
     }
 
-    public void removeNode(Task value){
-        Node temp = this.getNext();
+    public void removeNode(T value){
+        DoubleLinkedNode<T> temp = this.getNext();
         if(temp!=null){
             if(temp.getValue()==value){
                 this.setNext(temp.getNext());
@@ -41,10 +41,10 @@ public class Node {
         
     }
     
-    public void modify(Task task){
-        Node temp = this.getNext();
+    public void modify(T task){
+        DoubleLinkedNode<T> temp = this.getNext();
         if(temp!=null){
-            if(temp.getValue().getId()==task.getId()){
+            if(temp.getValue()==task){
                 temp.setValue(task);
             } else {
                 this.getNext().modify(task);
@@ -52,28 +52,33 @@ public class Node {
         }
     }
 
-    public Node getNext() {
+    public DoubleLinkedNode<T> getNext() {
         return next;
     }
 
-    public void setNext(Node next) {
+    public void setNext(DoubleLinkedNode<T> next) {
         this.next = next;
     }
 
-    public Node getPrev() {
+    public DoubleLinkedNode<T> getPrev() {
         return prev;
     }
 
-    public void setPrev(Node prev) {
+    public void setPrev(DoubleLinkedNode<T> prev) {
         this.prev = prev;
     }
 
-    public Task getValue() {
+    public T getValue() {
         return value;
     }
 
-    public void setValue(Task value) {
+    public void setValue(T value) {
         this.value = value;
+    }
+
+    public String getTitle(){
+        Task task = (Task) value;
+        return task.getTitle();
     }
 
     

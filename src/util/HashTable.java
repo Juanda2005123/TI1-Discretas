@@ -1,13 +1,11 @@
 package util;
 
-import model.Task;
+public class HashTable<T> {
 
-public class HashTable {
-
-    private Node[] hashTable;
+    private DoubleLinkedNode<T>[] hashTable;
 
     public HashTable() {
-        hashTable = new Node[23]; //A siempre ganar como el 23
+        hashTable = new DoubleLinkedNode[23]; //A siempre ganar como el 23
     }
 
     public int hashFunction(String key){ //Title
@@ -21,9 +19,9 @@ public class HashTable {
         return answer;
     }
 
-    public void add(Task newTask){
-        Node node = new Node(newTask);
-        int key = hashFunction(newTask.getTitle());
+    public void add(T newTask){
+        DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(newTask);
+        int key = hashFunction(node.getTitle());
 
         if(hashTable[key]==null){
             hashTable[key] = node;
@@ -32,10 +30,12 @@ public class HashTable {
         }
     }
 
-    public void remove(Task value) {
-        int key = hashFunction(value.getTitle());
+    public void remove(T value) {
+        DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(value);
 
-        Node temp = hashTable[key];
+        int key = hashFunction(node.getTitle());
+
+        DoubleLinkedNode<T> temp = hashTable[key];
 
         if(temp!=null){
             if(temp.getValue()==value){
@@ -46,13 +46,14 @@ public class HashTable {
         }
     }   
     
-    public void modify(Task task){
-        int key = hashFunction(task.getTitle());
+    public void modify(T task){
+        DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(task);
+        int key = hashFunction(node.getTitle());
         
-        Node temp = hashTable[key];
+        DoubleLinkedNode<T> temp = hashTable[key];
         
         if(temp!=null){
-            if(temp.getValue().getId()==task.getId()){
+            if(temp.getValue()==task){
                 temp.setValue(task);
                 hashTable[key] = temp;
             } else {

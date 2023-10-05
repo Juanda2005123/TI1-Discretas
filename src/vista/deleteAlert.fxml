@@ -11,7 +11,7 @@
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="300.0" styleClass="black-background" stylesheets="@../values/styles.css" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="priority" text="Priority" textFill="#e1e1e1">
+            <Label text="¿Delete the task?" textFill="#e1e1e1">
                <HBox.margin>
                   <Insets left="20.0" />
                </HBox.margin>

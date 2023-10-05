@@ -19,9 +19,7 @@ import javafx.stage.Stage;
  * @author Juan David Quintero
  */
 public class DeleteAlertController implements Initializable {
-
-    @FXML
-    private Label priority;
+    
     @FXML
     private Button cancelButton;
     @FXML
@@ -40,7 +38,6 @@ public class DeleteAlertController implements Initializable {
     }    
     
     public void initAttributes(Task task) {
-        priority.setText(task.priorityToString());
         title.setText(task.getTitle());
         delete = false;
     }

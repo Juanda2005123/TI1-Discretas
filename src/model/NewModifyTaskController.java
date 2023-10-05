@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
@@ -67,25 +68,48 @@ public class NewModifyTaskController implements Initializable {
 
     @FXML
     private void submitData(ActionEvent event) {
+        LocalDate now = LocalDate.now();
+        
         String newTitle = this.title.getText();
         String newDescription = this.description.getText();        
-        PriorityLevel priority = stringToPriorityLevel(priorityChoiceBox.getValue());
         LocalDate deadLine = deadLinePicker.getValue();
         
-        Task newTask = new Task(newTitle, newDescription, deadLine, priority);
         
-        if(this.task!=null){
-            this.task.setTitle(newTitle);
-            this.task.setDescription(newDescription);
-            this.task.setPriority(priority);
-            this.task.setDeadLine(deadLine);
-            
+        if(newTitle.equals("")||(newDescription.equals(""))||(priorityChoiceBox.getValue()==null)||(deadLinePicker.getValue()==null)){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("Invalid input");
+            alert.setContentText("All fields must be filled out");
+            alert.showAndWait();
         } else {
-            this.task = newTask;
+            if(deadLinePicker.getValue().isAfter(now.plusDays(-1))){
+                
+                PriorityLevel priority = stringToPriorityLevel(priorityChoiceBox.getValue());
+
+                Task newTask = new Task(newTitle, newDescription, deadLine, priority);
+
+                if(this.task!=null){
+                    this.task.setTitle(newTitle);
+                    this.task.setDescription(newDescription);
+                    this.task.setPriority(priority);
+                    this.task.setDeadLine(deadLine);
+
+                } else {
+                    this.task = newTask;
+                }
+
+                Stage stage = (Stage) this.submitButton.getScene().getWindow();
+                stage.close();
+            } else {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText(null);
+                alert.setTitle("Invalid date");
+                alert.setContentText("The date is prior to the current date");
+                alert.showAndWait();
+            }
         }
+
         
-        Stage stage = (Stage) this.submitButton.getScene().getWindow();
-        stage.close();
     }
     
     

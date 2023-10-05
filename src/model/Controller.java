@@ -42,7 +42,7 @@ public class Controller implements Initializable{
     @FXML
     private Button finishNonPriority;
     
-    private int taskIdCount;
+    
     
     //NORMAL
     private HashTable tasks;
@@ -87,8 +87,6 @@ public class Controller implements Initializable{
             stage.showAndWait();
             
             Task newTask = controllerAdd.getTask();
-            newTask.setId(taskIdCount);
-            taskIdCount++;
             
             if(newTask != null){
                 

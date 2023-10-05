@@ -10,8 +10,7 @@ public class Task {
     private LocalDate deadLine;
     
     private final String imgSrc;
-    
-    private int id;
+
     
     
     public Task(String title, String description, LocalDate deadLine, PriorityLevel priority){
@@ -40,13 +39,6 @@ public class Task {
         return msg;
     }
     
-    public void setId(int id){
-        this.id = id;
-    }
-    
-    public int getId(){
-        return id;
-    }
 
     public String getTitle() {
         return title;
