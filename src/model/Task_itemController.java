@@ -47,8 +47,16 @@ public class Task_itemController implements Initializable {
     private Task task;
     @FXML
     private HBox hBox;
+    @FXML
+    private Button deleteButton;
 
     
+    private Controller parent;
+    
+    
+    public void setParent(Controller p){
+        this.parent = p;
+    }
     
     /**
      * Initializes the controller class.
@@ -93,6 +101,37 @@ public class Task_itemController implements Initializable {
             prioritary.setText(task.priorityToString());
             deadLine.setText(task.getDeadLineToString());
             
+            if(parent != null){
+                parent.handleTaskEdit(task);
+            }
+            
+            
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void deleteTask(ActionEvent event) {
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/vista/deleteAlert.fxml"));
+            
+            Parent root = loader.load();
+            DeleteAlertController cDelete = loader.getController();
+            
+            cDelete.initAttributes(task);
+            
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.showAndWait();
+            
+            boolean delete = cDelete.isDelete();
+            
+            if(delete&&(parent != null)){
+                parent.handleTaskDelete(hBox, task);
+            }
+                
             
         } catch(IOException e){
             e.printStackTrace();
@@ -100,11 +139,9 @@ public class Task_itemController implements Initializable {
     }
 
     
-   
-    
-
-
-    
+    public Task getTask(){
+        return task;
+    }
         
 }
     

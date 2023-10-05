@@ -28,7 +28,9 @@ public class Node {
         if(temp!=null){
             if(temp.getValue()==value){
                 this.setNext(temp.getNext());
-                this.getNext().setPrev(this);
+                if(this.getNext()!=null){
+                    this.getNext().setPrev(this);
+                }
 
                 temp.setNext(null);
                 temp.setPrev(null);
@@ -37,6 +39,17 @@ public class Node {
             }
         } 
         
+    }
+    
+    public void modify(Task task){
+        Node temp = this.getNext();
+        if(temp!=null){
+            if(temp.getValue().getId()==task.getId()){
+                temp.setValue(task);
+            } else {
+                this.getNext().modify(task);
+            }
+        }
     }
 
     public Node getNext() {

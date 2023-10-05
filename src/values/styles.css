@@ -25,3 +25,9 @@
     -fx-background-radius: 5;
 
 }
+
+.border-Button{
+    -fx-border-color: #212121;
+    -fx-background-color: #000000;
+    -fx-border-radius: 5;
+}

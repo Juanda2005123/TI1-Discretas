@@ -11,6 +11,7 @@ import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.event.ActionEvent;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,9 +42,8 @@ public class Controller implements Initializable{
     @FXML
     private Button finishNonPriority;
     
+    private int taskIdCount;
     
-    
-
     //NORMAL
     private HashTable tasks;
    
@@ -54,7 +54,16 @@ public class Controller implements Initializable{
         tasks = new HashTable();
     }
 
-
+    public void handleTaskEdit(Task task){
+        
+        tasks.modify(task);
+    }
+    
+    public void handleTaskDelete(HBox hbox, Task task) {
+        
+        tasksLayout.getChildren().remove(hbox);
+        tasks.remove(task);
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -78,6 +87,8 @@ public class Controller implements Initializable{
             stage.showAndWait();
             
             Task newTask = controllerAdd.getTask();
+            newTask.setId(taskIdCount);
+            taskIdCount++;
             
             if(newTask != null){
                 
@@ -88,6 +99,7 @@ public class Controller implements Initializable{
                 Task_itemController tic = fxmlLoader.getController();
                 tic.initAttributes(newTask);
                 tasksLayout.getChildren().add(hBox);
+                tic.setParent(this);
                 
                 tasks.add(newTask);
                 

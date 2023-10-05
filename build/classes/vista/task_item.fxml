@@ -46,5 +46,17 @@
             <Insets left="20.0" />
          </HBox.margin>
       </Label>
+      <Button fx:id="deleteButton" mnemonicParsing="false" onAction="#deleteTask" styleClass="buttonRound" stylesheets="@../values/styles.css">
+         <graphic>
+            <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/finish.png" />
+               </image>
+            </ImageView>
+         </graphic>
+         <HBox.margin>
+            <Insets right="10.0" />
+         </HBox.margin>
+      </Button>
    </children>
 </HBox>

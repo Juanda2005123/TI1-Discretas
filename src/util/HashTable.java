@@ -45,6 +45,21 @@ public class HashTable {
             }
         }
     }   
+    
+    public void modify(Task task){
+        int key = hashFunction(task.getTitle());
+        
+        Node temp = hashTable[key];
+        
+        if(temp!=null){
+            if(temp.getValue().getId()==task.getId()){
+                temp.setValue(task);
+                hashTable[key] = temp;
+            } else {
+                temp.modify(task);
+            }
+        }
+    }
 
 
 
