@@ -80,6 +80,7 @@ public class DoubleLinkedNode<T> {
         Task task = (Task) value;
         return task.getTitle();
     }
+    
 
     
 }

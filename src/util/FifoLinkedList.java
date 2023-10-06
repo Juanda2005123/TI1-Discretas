@@ -1,18 +1,18 @@
 package util;
 
-import model.Task;
+import exceptions.EmptyListException;
 
 public class FifoLinkedList<T,V> {
-    private NodeFifo<T,V> first;
-    private NodeFifo<T,V> last;
+    private DoubleLinkedNode<T> first;
+    private DoubleLinkedNode<T> last;
 
     public FifoLinkedList(){
         first = null;
         last = null;
     }
 
-    public void enqueue(Class<T,V> value){
-        NodeFifo<T,V> node = new NodeFifo<>(value);
+    public void enqueue(T value){ //Add
+        DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(value);
         if(isEmpty()){
             first = node;
             last = node;
@@ -22,27 +22,28 @@ public class FifoLinkedList<T,V> {
             first = node;
         }
     }
-    public void dequeue() throws EmptyListException{
+    
+    public void dequeue() throws EmptyListException{ //Remove
         if(isEmpty()){
             throw new EmptyListException("The list is empty");
         } else {
-            NodeFifo<T,V> temp = last.getPrev();
+            DoubleLinkedNode<T> temp = last.getPrev();
             temp.setNext(null);
             last.setPrev(null);
             last = temp;
         }
     }
-
-    public Class<T,V> peek() throws EmptyListException{
+    
+    public T peek() throws EmptyListException{//Watch the last one, the first that entered
         if(isEmpty()){
             throw new EmptyListException("The list is empty");
         } 
-        Class<T,V> value = last.getValue();
+        T value = last.getValue();
         return value;
     }
 
     public boolean isEmpty(){
-        return (first==null) ? true : false;
+        return (first==null);
     }
     
 

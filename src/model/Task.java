@@ -2,8 +2,9 @@ package model;
 
 import java.time.LocalDate;
 
-public class Task {
+public class Task implements Comparable{
     private PriorityLevel priority;
+    private int priorityNum;
     private String title;
     private String description;    
     
@@ -20,6 +21,7 @@ public class Task {
         this.description = description;
         //format = new SimpleDateFormat("dd--mm-yyyy");
         imgSrc = ("/img/edit.png");
+        setPriorityNum();
     }
 
     public String priorityToString(){
@@ -37,6 +39,24 @@ public class Task {
         }
         
         return msg;
+    }
+    
+    private void setPriorityNum(){
+        priorityNum = 0;
+
+        if(priority==PriorityLevel.LOW){
+            priorityNum = 1;
+        } else if(priority==PriorityLevel.MEDIUM){
+            priorityNum = 2;
+        } else if(priority==PriorityLevel.HIGH){
+            priorityNum = 3;
+        } else if(priority==PriorityLevel.IMMEDIATE){
+            priorityNum = 4;
+        }
+    }
+    
+    public int getPriorityNum(){
+        return priorityNum;
     }
     
 
@@ -78,5 +98,31 @@ public class Task {
 
     public PriorityLevel getPriority() {
         return priority;
+    }
+
+    @Override
+    public int compareTo(Object o) { //1. This>o 0. This==o  -1 This<o
+        int num = 0;
+        Task taskCompare = (Task)o;
+        if(priorityNum > taskCompare.getPriorityNum()){
+            num = 1;
+        } else if(priorityNum < taskCompare.getPriorityNum()){
+            num = -1;
+        }
+        return num;
+        
+    }
+    
+    public int compareToDeadLine(Object o){
+        
+        int num = 0;
+        Task taskCompare = (Task)o;
+        
+        if(deadLine.isAfter(taskCompare.getDeadLine())){
+            num = 1;
+        } else if(deadLine.isBefore(taskCompare.getDeadLine())){
+            num = -1;
+        }
+        return num;
     }
 }
