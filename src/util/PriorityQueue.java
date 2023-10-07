@@ -45,43 +45,50 @@ public class PriorityQueue {
     
     public void shiftUpPriority(int i){
         
-        DoubleLinkedNode<Task> parent = priority.get(parent(i));
-        DoubleLinkedNode<Task> child = priority.get(i);
+        if(i!=0){
+            DoubleLinkedNode<Task> parent = priority.get(parent(i));
+            DoubleLinkedNode<Task> child = priority.get(i);
 
-        while((i > 0 && (child.getValue().compareTo(parent))>=0)&&parent!=null){
-            if((child.getValue().compareTo(parent))==0){
-                if(child.getValue().compareToDeadLine(parent)==1){
+            while((i > 0 && (child.getValue().compareTo(parent.getValue()))>=0)&&parent!=null){
+                if((child.getValue().compareTo(parent.getValue()))==0){
+                    if(child.getValue().compareToDeadLine(parent.getValue())>=0){
+                        swap(parent(i),i);
+                        i = parent(i);
+
+                        parent = priority.get(parent(i));
+                        child = priority.get(i);
+                    } else {
+                        break;
+                    }
+                } else {
                     swap(parent(i),i);
                     i = parent(i);
-                    
+
                     parent = priority.get(parent(i));
                     child = priority.get(i);
-                } else {
-                    break;
                 }
-            } else {
+            }   
+        }
+        
+        
+    }
+    
+    public void shiftUpDeadLine(int i){
+        
+        if(i!=0){
+            DoubleLinkedNode<Task> parent = priority.get(parent(i));
+            DoubleLinkedNode<Task> child = priority.get(i);
+
+            while((i > 0 && (child.getValue().compareToDeadLine(parent.getValue()))<=0)&&parent!=null){
                 swap(parent(i),i);
                 i = parent(i);
 
                 parent = priority.get(parent(i));
                 child = priority.get(i);
             }
-        }
-        
-    }
-    
-    public void shiftUpDeadLine(int i){
-        DoubleLinkedNode<Task> parent = priority.get(parent(i));
-        DoubleLinkedNode<Task> child = priority.get(i);
-        
-        while((i > 0 && (child.getValue().compareToDeadLine(parent))>=0)&&parent!=null){
-            swap(parent(i),i);
-            i = parent(i);
 
-            parent = priority.get(parent(i));
-            child = priority.get(i);
         }
-       
+               
     }
     
     public void shiftDownPriority(int i){
@@ -89,8 +96,17 @@ public class PriorityQueue {
         
         int left = leftChild(i);
         int right = rightChild(i);
-        Task leftTask = priority.get(left).getValue();
-        Task rightTask = priority.get(right).getValue();
+        
+        Task leftTask = null;
+        Task rightTask = null;
+        
+        if(left<=size){
+            leftTask = priority.get(left).getValue();
+        }
+        if(right<=size){
+            rightTask = priority.get(right).getValue();
+        }
+        
         
         if(leftTask!=null){
             if(left <= size && leftTask.compareTo(priority.get(maxIndex).getValue())==1){
@@ -115,8 +131,18 @@ public class PriorityQueue {
         
         int left = leftChild(i);
         int right = rightChild(i);
-        Task leftTask = priority.get(left).getValue();
-        Task rightTask = priority.get(right).getValue();
+        
+        Task leftTask = null;
+        Task rightTask = null;
+        
+        if(left<=size){
+            leftTask = priority.get(left).getValue();
+        }
+        if(right<=size){
+            rightTask = priority.get(right).getValue();
+        }
+        
+       
         
         if(leftTask!=null){
             if(left <= size && leftTask.compareToDeadLine(priority.get(maxIndex).getValue())==1){
@@ -156,7 +182,45 @@ public class PriorityQueue {
     
     //FALTA UN ELIMINAR
     //https://www.geeksforgeeks.org/priority-queue-using-binary-heap/
-    public void remove(int i){
-        
+    public void removePriority(Task task){
+        for (int i = 0; i < priority.size(); i++) {
+            Task actual = priority.get(i).getValue();
+            if(actual==task){
+                removeShiftUpPriority(i);
+                break;
+            }
+        }
+    }
+    
+    private void removeShiftUpPriority(int i){
+        DoubleLinkedNode<Task> node = new DoubleLinkedNode<>(getMax());
+        priority.set(i, node);
+        shiftUpPriority(i);
+        extractMaxPriority();
+    }
+    
+    public void removeDeadLine(Task task){
+        for (int i = 0; i < priority.size(); i++) {
+            Task actual = priority.get(i).getValue();
+            if(actual==task){
+                removeShiftUpDeadLine(i);
+                break;
+            }
+        }
+    }
+    
+    private void removeShiftUpDeadLine(int i){
+        DoubleLinkedNode<Task> node = new DoubleLinkedNode<>(getMax());
+        priority.set(i, node);
+        shiftUpDeadLine(i);
+        extractMaxDeadLine();
+    }
+    
+    public Task getMax(){
+        return priority.get(0).getValue();
+    }
+    
+    public int getSize(){
+        return size;
     }
 }
