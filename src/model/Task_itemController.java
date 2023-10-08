@@ -90,6 +90,8 @@ public class Task_itemController implements Initializable {
             NewModifyTaskController controllerEdit = loader.getController();
             controllerEdit.initAttributes(task);
             
+            Task oldOne = task;
+            
             Scene scene = new Scene(root);
             Stage stage = new Stage();
             stage.setScene(scene);
@@ -102,7 +104,7 @@ public class Task_itemController implements Initializable {
             deadLine.setText(task.getDeadLineToString());
             
             if(parent != null){
-                parent.handleTaskEdit(task);
+                parent.handleTaskEdit(task, oldOne);
             }
             
             

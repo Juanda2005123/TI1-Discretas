@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package util;
+import exceptions.EmptyListException;
 import java.util.ArrayList;
 import model.Task;
 /**
@@ -188,7 +189,10 @@ public class PriorityQueue {
         }
     }
     
-    public Task extractMaxPriority(){
+    public Task extractMaxPriority() throws EmptyListException{
+        if(size<0){
+            throw new EmptyListException("The list is empty");
+        }
         Task task = priority.get(0).getValue();
         priority.set(0, priority.get(size));
         priority.remove(size);
@@ -197,7 +201,10 @@ public class PriorityQueue {
         return task;
     }
     
-    public Task extractMaxDeadLine(){
+    public Task extractMaxDeadLine() throws EmptyListException{
+        if(size<0){
+            throw new EmptyListException("The list is empty");
+        }
         Task task = priority.get(0).getValue();
         priority.set(0, priority.get(size));
         priority.remove(size);
@@ -206,7 +213,7 @@ public class PriorityQueue {
         return task;
     }
     
-    public void removePriority(Task task){
+    public void removePriority(Task task) throws EmptyListException{
         for (int i = 0; i < priority.size(); i++) {
             Task actual = priority.get(i).getValue();
             if(actual.getId()==task.getId()){
@@ -217,14 +224,14 @@ public class PriorityQueue {
         
     }
     
-    private void removeShiftUpPriority(int i){
+    private void removeShiftUpPriority(int i) throws EmptyListException{
         DoubleLinkedNode<Task> node = new DoubleLinkedNode<>(getMax());
         priority.set(i, node);
         shiftUpPriority(i);
         extractMaxPriority();
     }
     
-    public void removeDeadLine(Task task){
+    public void removeDeadLine(Task task) throws EmptyListException{
         for (int i = 0; i < priority.size(); i++) {
             Task actual = priority.get(i).getValue();
             if(actual.getId()==task.getId()){
@@ -235,21 +242,21 @@ public class PriorityQueue {
         
     }
     
-    private void removeShiftUpDeadLine(int i){
+    private void removeShiftUpDeadLine(int i) throws EmptyListException{
         DoubleLinkedNode<Task> node = new DoubleLinkedNode<>(getMax());
         priority.set(i, node);
         shiftUpDeadLine(i);
         extractMaxDeadLine();
     }
     
-    public void modifyPriority(Task task){
+    public void modifyPriority(Task task) throws EmptyListException{
         removePriority(task);
         insert(task);
         shiftUpPriority(size);
         
     }
     
-    public void modifyDeadLine(Task task){
+    public void modifyDeadLine(Task task) throws EmptyListException{
         
         removeDeadLine(task);
         insert(task);
@@ -257,7 +264,10 @@ public class PriorityQueue {
         
     }
     
-    public Task getMax(){
+    public Task getMax() throws EmptyListException{
+        if(size<0){
+            throw new EmptyListException("The list is empty");
+        }
         return priority.get(0).getValue();
     }
     

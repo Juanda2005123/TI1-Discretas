@@ -12,7 +12,6 @@ import javafx.fxml.FXMLLoader;
  */
 public class IntegradoraDiscretas1 extends Application {
     
-    
     @Override
     public void start(Stage primaryStage) throws Exception{
         

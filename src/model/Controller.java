@@ -1,6 +1,7 @@
 package model;
 
 //Interfaz Grafica
+import exceptions.EmptyListException;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -8,6 +9,8 @@ import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
@@ -15,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -71,9 +75,10 @@ public class Controller implements Initializable{
         
     }
 
-    public void handleTaskEdit(Task task){
+    public void handleTaskEdit(Task task, Task oldOne){
         
-        modifyTaskToStructures(task);
+        modifyTaskToStructures(task, oldOne);
+        filterTasksInside();
     }
     
     public void handleTaskDelete(HBox hbox, Task task) {
@@ -108,21 +113,10 @@ public class Controller implements Initializable{
             tasksId++;
             
             if(newTask != null){
-                
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));
-                
-                HBox hBox = fxmlLoader.load();
-                Task_itemController tic = fxmlLoader.getController();
-                tic.initAttributes(newTask);
-                tasksLayout.getChildren().add(hBox);
-                tic.setParent(this);
-                
+                               
                 addTaskToStructures(newTask);
-                
                 filterTasksInside();
-                
-                
+              
             }
             
             
@@ -173,25 +167,31 @@ public class Controller implements Initializable{
     }
     
     private void organizeByPriority() throws IOException{
-        tasksLayout.getChildren().clear();
-            PriorityQueue p = new PriorityQueue(showANDCompleteByPriority);
-            System.out.println(showANDCompleteByPriority.getSize());
-            while(p.getSize()>=0){
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));
+        try{
+            tasksLayout.getChildren().clear();
+                PriorityQueue p = new PriorityQueue(showANDCompleteByPriority);
+                System.out.println(showANDCompleteByPriority.getSize());
+                while(p.getSize()>=0){
+                    FXMLLoader fxmlLoader = new FXMLLoader();
+                    fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));
 
-                HBox hBox = fxmlLoader.load();
-                Task_itemController tic = fxmlLoader.getController();
-                
-                tic.initAttributes(p.extractMaxPriority());
-                tasksLayout.getChildren().add(hBox);
-                tic.setParent(this);
-            }
+                    HBox hBox = fxmlLoader.load();
+                    Task_itemController tic = fxmlLoader.getController();
+
+                    tic.initAttributes(p.extractMaxPriority());
+                    tasksLayout.getChildren().add(hBox);
+                    tic.setParent(this);
+                }
+        } catch(EmptyListException e){
+            e.printStackTrace();
+        }
+        
             
     }
     
     private void organizeByDeadLine() throws IOException{
-        tasksLayout.getChildren().clear();
+        try{
+            tasksLayout.getChildren().clear();
             PriorityQueue p = new PriorityQueue(showByDeadLine);
             System.out.println(p.getSize());
             while(p.getSize()>=0){
@@ -205,16 +205,68 @@ public class Controller implements Initializable{
                 tasksLayout.getChildren().add(hBox);
                 tic.setParent(this);
             }
+        } catch(EmptyListException e){
+            e.printStackTrace();
+        }
+        
             
     }
 
     @FXML
     private void finishPriorityTask(ActionEvent event) {
-        
+        try{
+            if(showANDCompleteByPriority.getMax().getPriority()==PriorityLevel.NON){
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setHeaderText(null);
+                alert.setTitle("No more tasks");
+                alert.setContentText("There are not more tasks to finish by Priority");
+                alert.showAndWait();
+            } else {
+                Task task = showANDCompleteByPriority.extractMaxPriority();
+                //REMOVE IN STRUCTURES
+                tasks.remove(task);//HashTable
+                //show tasks
+                showByDeadLine.removeDeadLine(task);
+                //Complete tasks
+                completeNonPriorityTask.remove(task);
+                //REMOVE IN STRUCTURES
+
+                filterTasksInside();
+            }
+        } catch(EmptyListException e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("No more tasks");
+            alert.setContentText("There are not more tasks to finish by Priority");
+            alert.showAndWait();
+        }
+
     }
 
     @FXML
     private void finishNonPriorityTask(ActionEvent event) {
+        try{
+            Task task = completeNonPriorityTask.peek();
+            completeNonPriorityTask.dequeue();
+            
+            //REMOVE IN STRUCTURES
+            tasks.remove(task);//HashTable
+            //Show and complete tasks
+            showANDCompleteByPriority.removePriority(task);
+            //show tasks
+            showByDeadLine.removeDeadLine(task);
+            //REMOVE IN STRUCTURES
+            
+            filterTasksInside();
+            
+        } catch(EmptyListException e){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("No more tasks");
+            alert.setContentText("There are not more tasks to finish by Non-Priority");
+            alert.showAndWait();
+        }
+        
         
     }
     
@@ -229,34 +281,55 @@ public class Controller implements Initializable{
         showByDeadLine.insert(task);
         showByDeadLine.shiftUpDeadLine(showByDeadLine.getSize());
         
-        //Complete tasks
-        completeNonPriorityTask.enqueue(task);
+        if(task.getPriority()==PriorityLevel.NON){
+            //Complete tasks
+            completeNonPriorityTask.enqueue(task);
+        }
+
     }
     
     public void removeTaskToStructures(Task task){
-        tasks.remove(task);//HashTable
-        
-        //Show and complete tasks
-        showANDCompleteByPriority.removePriority(task);
-        
-        //show tasks
-        showByDeadLine.removeDeadLine(task);
-        
-        //Complete tasks
-        completeNonPriorityTask.remove(task);
+        try {
+            tasks.remove(task);//HashTable
+            
+            //Show and complete tasks
+            showANDCompleteByPriority.removePriority(task);
+            
+            //show tasks
+            showByDeadLine.removeDeadLine(task);
+            if(task.getPriority()==PriorityLevel.NON){
+                //Complete tasks
+                completeNonPriorityTask.remove(task);
+            }
+        } catch(EmptyListException e){
+            e.printStackTrace();
+        }
+                
     }
     
-    public void modifyTaskToStructures(Task task){
-        tasks.modify(task);//HashTable
+    public void modifyTaskToStructures(Task task, Task oldOne){
+        try {
+            tasks.modify(task);//HashTable
+            
+            //Show and complete tasks
+            showANDCompleteByPriority.modifyPriority(task);
+            
+            //show tasks
+            showByDeadLine.modifyDeadLine(task);
+            
+            if(oldOne.getPriority()==PriorityLevel.NON){
+                if(task.getPriority()==PriorityLevel.NON){
+                    //Complete tasks
+                    completeNonPriorityTask.modify(task);
+                } else {
+                    completeNonPriorityTask.remove(task);
+                }
+                
+            }
+        } catch(EmptyListException e){
+            e.printStackTrace();
+        }
         
-        //Show and complete tasks
-        showANDCompleteByPriority.modifyPriority(task);
-        
-        //show tasks
-        showByDeadLine.modifyDeadLine(task);
-        
-        //Complete tasks
-        completeNonPriorityTask.modify(task);
     }
 
     
