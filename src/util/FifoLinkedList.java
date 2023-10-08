@@ -2,7 +2,7 @@ package util;
 
 import exceptions.EmptyListException;
 
-public class FifoLinkedList<T,V> {
+public class FifoLinkedList<T> {
     private DoubleLinkedNode<T> first;
     private DoubleLinkedNode<T> last;
 
@@ -40,6 +40,19 @@ public class FifoLinkedList<T,V> {
         } 
         T value = last.getValue();
         return value;
+    }
+    
+    public void modify(T value){
+        DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(value);
+        if(!isEmpty()){
+            if(first.getId()==node.getId()){
+                first.setValue(value);
+            } else if(last.getId()==node.getId()){
+                last.setValue(value);
+            } else {
+                first.modify(node);
+            }
+        }
     }
 
     public boolean isEmpty(){

@@ -41,11 +41,12 @@ public class DoubleLinkedNode<T> {
         
     }
     
-    public void modify(T task){
+    public void modify(DoubleLinkedNode<T> task){
+        
         DoubleLinkedNode<T> temp = this.getNext();
         if(temp!=null){
-            if(temp.getValue()==task){
-                temp.setValue(task);
+            if(temp.getId()==task.getId()){
+                temp.setValue(task.getValue());
             } else {
                 this.getNext().modify(task);
             }
@@ -79,6 +80,11 @@ public class DoubleLinkedNode<T> {
     public String getTitle(){
         Task task = (Task) value;
         return task.getTitle();
+    }
+    
+    public int getId(){
+        Task task = (Task) value;
+        return task.getId();
     }
     
 

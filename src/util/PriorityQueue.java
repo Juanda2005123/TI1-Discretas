@@ -63,8 +63,9 @@ public class PriorityQueue {
                 } else {
                     swap(parent(i),i);
                     i = parent(i);
-
-                    parent = priority.get(parent(i));
+                    if(i!=0){
+                       parent = priority.get(parent(i));
+                    }
                     child = priority.get(i);
                 }
             }   
@@ -180,12 +181,10 @@ public class PriorityQueue {
         return task;
     }
     
-    //FALTA UN ELIMINAR
-    //https://www.geeksforgeeks.org/priority-queue-using-binary-heap/
     public void removePriority(Task task){
         for (int i = 0; i < priority.size(); i++) {
             Task actual = priority.get(i).getValue();
-            if(actual==task){
+            if(actual.getId()==task.getId()){
                 removeShiftUpPriority(i);
                 break;
             }
@@ -202,7 +201,7 @@ public class PriorityQueue {
     public void removeDeadLine(Task task){
         for (int i = 0; i < priority.size(); i++) {
             Task actual = priority.get(i).getValue();
-            if(actual==task){
+            if(actual.getId()==task.getId()){
                 removeShiftUpDeadLine(i);
                 break;
             }
@@ -214,6 +213,46 @@ public class PriorityQueue {
         priority.set(i, node);
         shiftUpDeadLine(i);
         extractMaxDeadLine();
+    }
+    
+    public void modifyPriority(Task task){
+        DoubleLinkedNode<Task> newNode = new DoubleLinkedNode<>(task);
+        
+        for(int i = 0; i < priority.size(); i++){
+            DoubleLinkedNode<Task> node = priority.get(i);
+            if(node.getValue().getId()==task.getId()){
+                priority.set(i, newNode);
+                shiftDownPriority(i);
+                for(int j = i; j < priority.size(); j++){
+                    node = priority.get(j);
+                    if(node.getValue().getId()==task.getId()){
+                        shiftUpPriority(j);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+    }
+    
+    public void modifyDeadLine(Task task){
+        
+        for(int i = 0; i < priority.size(); i++){
+            DoubleLinkedNode<Task> node = priority.get(i);
+            if(node.getValue().getId()==task.getId()){
+                priority.set(i, new DoubleLinkedNode<Task>(task));
+                shiftDownDeadLine(i);
+                for(int j = i; j < priority.size(); j++){
+                    node = priority.get(j);
+                    if(node.getValue().getId()==task.getId()){
+                        shiftUpDeadLine(j);
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        
     }
     
     public Task getMax(){

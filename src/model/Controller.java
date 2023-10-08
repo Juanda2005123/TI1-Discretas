@@ -17,11 +17,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.FifoLinkedList;
 
 
 
 //Normal
 import util.HashTable;
+import util.PriorityQueue;
 
 public class Controller implements Initializable{
     
@@ -45,13 +47,26 @@ public class Controller implements Initializable{
     
     
     //NORMAL
-    private HashTable tasks;
+    private HashTable<Task> tasks;
+    private PriorityQueue showANDCompleteByPriority;
+    private PriorityQueue showByDeadLine;
+    private FifoLinkedList<Task> completeNonPriorityTask;
+    
+    private int tasksId;
    
 
-
-
     public Controller(){
-        tasks = new HashTable();
+        //Tasks
+        tasks = new HashTable<>();
+        //Show and complete tasks
+        showANDCompleteByPriority = new PriorityQueue();
+        //show tasks
+        showByDeadLine = new PriorityQueue();
+        //Complete tasks
+        completeNonPriorityTask = new FifoLinkedList<>();
+        
+        tasksId = 0;
+        
     }
 
     public void handleTaskEdit(Task task){
@@ -87,6 +102,8 @@ public class Controller implements Initializable{
             stage.showAndWait();
             
             Task newTask = controllerAdd.getTask();
+            newTask.setId(tasksId);
+            tasksId++;
             
             if(newTask != null){
                 
@@ -99,7 +116,8 @@ public class Controller implements Initializable{
                 tasksLayout.getChildren().add(hBox);
                 tic.setParent(this);
                 
-                tasks.add(newTask);
+                addTaskToStructures(newTask);
+                
                 
             }
             
@@ -122,10 +140,27 @@ public class Controller implements Initializable{
 
     @FXML
     private void finishPriorityTask(ActionEvent event) {
+        
     }
 
     @FXML
     private void finishNonPriorityTask(ActionEvent event) {
+        
+    }
+    
+    private void addTaskToStructures(Task task){
+        tasks.add(task);//HashTable
+        
+        //Show and complete tasks
+        showANDCompleteByPriority.insert(task); 
+        showANDCompleteByPriority.shiftUpPriority(showANDCompleteByPriority.getSize());
+        
+        //show tasks
+        showByDeadLine.insert(task);
+        showByDeadLine.shiftUpDeadLine(showByDeadLine.getSize());
+        
+        //Complete tasks
+        completeNonPriorityTask.enqueue(task);
     }
     
 

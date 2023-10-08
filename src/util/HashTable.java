@@ -1,5 +1,6 @@
 package util;
 
+
 public class HashTable<T> {
 
     private DoubleLinkedNode<T>[] hashTable;
@@ -46,18 +47,20 @@ public class HashTable<T> {
         }
     }   
     
-    public void modify(T task){
-        DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(task);
-        int key = hashFunction(node.getTitle());
+    public void modify(T task1){
+        
+        DoubleLinkedNode<T> newNode = new DoubleLinkedNode<T>(task1);
+        int key = hashFunction(newNode.getTitle());
         
         DoubleLinkedNode<T> temp = hashTable[key];
         
         if(temp!=null){
-            if(temp.getValue()==task){
-                temp.setValue(task);
+            
+            if(temp.getId()==newNode.getId()){
+                temp.setValue(task1);
                 hashTable[key] = temp;
             } else {
-                temp.modify(task);
+                temp.modify(newNode);
             }
         }
     }

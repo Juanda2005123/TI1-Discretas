@@ -11,6 +11,7 @@ public class Task implements Comparable{
     private LocalDate deadLine;
     
     private final String imgSrc;
+    private int id;
 
     
     
@@ -22,6 +23,14 @@ public class Task implements Comparable{
         //format = new SimpleDateFormat("dd--mm-yyyy");
         imgSrc = ("/img/edit.png");
         setPriorityNum();
+        
+    }
+    
+    public void setId(int id){
+        this.id = id;
+    }
+    public int getId(){
+        return id;
     }
 
     public String priorityToString(){

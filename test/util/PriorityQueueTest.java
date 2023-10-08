@@ -134,4 +134,36 @@ public class PriorityQueueTest {
         assertEquals(new3,p.getMax());
     }
     
+    /**
+    @Test
+    public void testModify(){
+        LocalDate now = LocalDate.now();
+        
+        PriorityQueue p = new PriorityQueue();
+        
+        
+        Task new2 = new Task("2", "description", now, PriorityLevel.NON);
+        new2.setId(2);
+        p.insert(new2);
+        p.shiftUpPriority(p.getSize());
+        
+        Task new3 = new Task("3", "description", now, PriorityLevel.LOW);
+        new3.setId(3);
+        p.insert(new3);
+        p.shiftUpPriority(p.getSize());
+        
+        assertEquals(new3,p.getMax());
+        
+        new2.setPriority(PriorityLevel.HIGH);
+                
+        p.modifyPriority(new2);
+        
+        Task new22 = p.extractMaxPriority();
+        
+        assertEquals(new2.getId(),new22.getId());
+        
+        
+    }
+    */
+    
 }
