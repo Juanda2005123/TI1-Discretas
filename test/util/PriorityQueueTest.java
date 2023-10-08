@@ -18,6 +18,7 @@ public class PriorityQueueTest {
     
     public PriorityQueueTest() {}
 
+    
     @Test
     public void testInsertPriority(){
         
@@ -134,7 +135,7 @@ public class PriorityQueueTest {
         assertEquals(new3,p.getMax());
     }
     
-    /**
+    
     @Test
     public void testModify(){
         LocalDate now = LocalDate.now();
@@ -158,12 +159,10 @@ public class PriorityQueueTest {
                 
         p.modifyPriority(new2);
         
-        Task new22 = p.extractMaxPriority();
-        
-        assertEquals(new2.getId(),new22.getId());
+        assertEquals(new2.getId(),p.extractMaxPriority().getId());
         
         
     }
-    */
+    
     
 }

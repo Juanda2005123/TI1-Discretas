@@ -103,6 +103,7 @@ public class Task implements Comparable{
     
     public void setPriority(PriorityLevel priority) {
         this.priority = priority;
+        setPriorityNum();
     }
 
     public PriorityLevel getPriority() {

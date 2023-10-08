@@ -48,27 +48,34 @@ public class PriorityQueue {
         if(i!=0){
             DoubleLinkedNode<Task> parent = priority.get(parent(i));
             DoubleLinkedNode<Task> child = priority.get(i);
-
-            while((i > 0 && (child.getValue().compareTo(parent.getValue()))>=0)&&parent!=null){
+            while(parent!=null&&(i > 0 && (child.getValue().compareTo(parent.getValue()))>=0)){
                 if((child.getValue().compareTo(parent.getValue()))==0){
                     if(child.getValue().compareToDeadLine(parent.getValue())>=0){
                         swap(parent(i),i);
                         i = parent(i);
-
-                        parent = priority.get(parent(i));
+                        if(i!=0){
+                           parent = priority.get(parent(i));
+                        } else {
+                            parent=null;
+                        }
+                        
                         child = priority.get(i);
                     } else {
-                        break;
+                        parent=null;
                     }
                 } else {
                     swap(parent(i),i);
                     i = parent(i);
                     if(i!=0){
                        parent = priority.get(parent(i));
+                    } else {
+                        parent=null;
                     }
                     child = priority.get(i);
                 }
             }   
+            
+            
         }
         
         
@@ -80,7 +87,7 @@ public class PriorityQueue {
             DoubleLinkedNode<Task> parent = priority.get(parent(i));
             DoubleLinkedNode<Task> child = priority.get(i);
 
-            while((i > 0 && (child.getValue().compareToDeadLine(parent.getValue()))<=0)&&parent!=null){
+            while(parent!=null&&(i > 0 && (child.getValue().compareToDeadLine(parent.getValue()))<=0)){
                 swap(parent(i),i);
                 i = parent(i);
 
@@ -166,8 +173,8 @@ public class PriorityQueue {
     public Task extractMaxPriority(){
         Task task = priority.get(0).getValue();
         priority.set(0, priority.get(size));
-        priority.set(size, null);
-        size -= 1;
+        priority.remove(size);
+        size--;
         shiftDownPriority(0);
         return task;
     }
@@ -175,8 +182,8 @@ public class PriorityQueue {
     public Task extractMaxDeadLine(){
         Task task = priority.get(0).getValue();
         priority.set(0, priority.get(size));
-        priority.set(size, null);
-        size -= 1;
+        priority.remove(size);
+        size--;
         shiftDownDeadLine(0);
         return task;
     }
@@ -189,6 +196,7 @@ public class PriorityQueue {
                 break;
             }
         }
+        
     }
     
     private void removeShiftUpPriority(int i){
@@ -206,6 +214,7 @@ public class PriorityQueue {
                 break;
             }
         }
+        
     }
     
     private void removeShiftUpDeadLine(int i){
@@ -216,42 +225,17 @@ public class PriorityQueue {
     }
     
     public void modifyPriority(Task task){
-        DoubleLinkedNode<Task> newNode = new DoubleLinkedNode<>(task);
+        removePriority(task);
+        insert(task);
+        shiftUpPriority(size);
         
-        for(int i = 0; i < priority.size(); i++){
-            DoubleLinkedNode<Task> node = priority.get(i);
-            if(node.getValue().getId()==task.getId()){
-                priority.set(i, newNode);
-                shiftDownPriority(i);
-                for(int j = i; j < priority.size(); j++){
-                    node = priority.get(j);
-                    if(node.getValue().getId()==task.getId()){
-                        shiftUpPriority(j);
-                        break;
-                    }
-                }
-                break;
-            }
-        }
     }
     
     public void modifyDeadLine(Task task){
         
-        for(int i = 0; i < priority.size(); i++){
-            DoubleLinkedNode<Task> node = priority.get(i);
-            if(node.getValue().getId()==task.getId()){
-                priority.set(i, new DoubleLinkedNode<Task>(task));
-                shiftDownDeadLine(i);
-                for(int j = i; j < priority.size(); j++){
-                    node = priority.get(j);
-                    if(node.getValue().getId()==task.getId()){
-                        shiftUpDeadLine(j);
-                        break;
-                    }
-                }
-                break;
-            }
-        }
+        removeDeadLine(task);
+        insert(task);
+        shiftUpDeadLine(size);
         
     }
     
