@@ -4,6 +4,7 @@ package model;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import java.util.ResourceBundle;
@@ -17,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import util.DoubleLinkedNode;
 import util.FifoLinkedList;
 
 
@@ -71,13 +73,13 @@ public class Controller implements Initializable{
 
     public void handleTaskEdit(Task task){
         
-        tasks.modify(task);
+        modifyTaskToStructures(task);
     }
     
     public void handleTaskDelete(HBox hbox, Task task) {
         
         tasksLayout.getChildren().remove(hbox);
-        tasks.remove(task);
+        removeTaskToStructures(task);
     }
 
     @Override
@@ -118,6 +120,8 @@ public class Controller implements Initializable{
                 
                 addTaskToStructures(newTask);
                 
+                filterTasksInside();
+                
                 
             }
             
@@ -128,14 +132,80 @@ public class Controller implements Initializable{
         
     }
     
-    @FXML
-    public void filterTasks(ActionEvent event) {
-        if(filterTasks.getText().equalsIgnoreCase("DeadLine")){
-            filterTasks.setText("Priority");
-        } else {
-            filterTasks.setText("DeadLine");
+    private void filterTasksInside(){
+        try{
+            tasksLayout.getChildren().clear();
+            
+            if(filterTasks.getText().equalsIgnoreCase("DeadLine")){
+
+                organizeByDeadLine();
+
+            } else {
+
+                organizeByPriority();
+                
+            }
+        } catch(IOException e){
+            e.printStackTrace();
         }
         
+    }
+    
+    @FXML
+    public void filterTasks(ActionEvent event){
+    
+        try{
+            tasksLayout.getChildren().clear();
+            
+            if(filterTasks.getText().equalsIgnoreCase("DeadLine")){
+                
+                organizeByPriority();
+                filterTasks.setText("Priority");
+            } else {
+                
+
+                organizeByDeadLine();
+                filterTasks.setText("DeadLine");
+            }
+        } catch(IOException e){
+            e.printStackTrace();
+        }
+    }
+    
+    private void organizeByPriority() throws IOException{
+        tasksLayout.getChildren().clear();
+            PriorityQueue p = new PriorityQueue(showANDCompleteByPriority);
+            System.out.println(showANDCompleteByPriority.getSize());
+            while(p.getSize()>=0){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));
+
+                HBox hBox = fxmlLoader.load();
+                Task_itemController tic = fxmlLoader.getController();
+                
+                tic.initAttributes(p.extractMaxPriority());
+                tasksLayout.getChildren().add(hBox);
+                tic.setParent(this);
+            }
+            
+    }
+    
+    private void organizeByDeadLine() throws IOException{
+        tasksLayout.getChildren().clear();
+            PriorityQueue p = new PriorityQueue(showByDeadLine);
+            System.out.println(p.getSize());
+            while(p.getSize()>=0){
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));
+
+                HBox hBox = fxmlLoader.load();
+                Task_itemController tic = fxmlLoader.getController();
+                
+                tic.initAttributes(p.extractMaxDeadLine());
+                tasksLayout.getChildren().add(hBox);
+                tic.setParent(this);
+            }
+            
     }
 
     @FXML
@@ -163,6 +233,31 @@ public class Controller implements Initializable{
         completeNonPriorityTask.enqueue(task);
     }
     
+    public void removeTaskToStructures(Task task){
+        tasks.remove(task);//HashTable
+        
+        //Show and complete tasks
+        showANDCompleteByPriority.removePriority(task);
+        
+        //show tasks
+        showByDeadLine.removeDeadLine(task);
+        
+        //Complete tasks
+        completeNonPriorityTask.remove(task);
+    }
+    
+    public void modifyTaskToStructures(Task task){
+        tasks.modify(task);//HashTable
+        
+        //Show and complete tasks
+        showANDCompleteByPriority.modifyPriority(task);
+        
+        //show tasks
+        showByDeadLine.modifyDeadLine(task);
+        
+        //Complete tasks
+        completeNonPriorityTask.modify(task);
+    }
 
     
  

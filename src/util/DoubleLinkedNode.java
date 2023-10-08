@@ -25,8 +25,9 @@ public class DoubleLinkedNode<T> {
 
     public void removeNode(T value){
         DoubleLinkedNode<T> temp = this.getNext();
+        DoubleLinkedNode<T> toRemove = new DoubleLinkedNode<T>(value);
         if(temp!=null){
-            if(temp.getValue()==value){
+            if(temp.getId()==toRemove.getId()){
                 this.setNext(temp.getNext());
                 if(this.getNext()!=null){
                     this.getNext().setPrev(this);

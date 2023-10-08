@@ -164,5 +164,44 @@ public class PriorityQueueTest {
         
     }
     
+    @Test
+    public void testForShowTasks(){
+        LocalDate now = LocalDate.now();
+        
+        PriorityQueue p = new PriorityQueue();
+        
+        Task new1 = new Task("Title", "Description", now, PriorityLevel.LOW);
+        Task new2 = new Task("Title", "Description", now, PriorityLevel.HIGH);
+        Task new3 = new Task("Title", "Description", now, PriorityLevel.IMMEDIATE);
+        Task new4 = new Task("Title", "Description", now, PriorityLevel.NON);
+        Task new5 = new Task("Title", "Description", now, PriorityLevel.MEDIUM);
+        Task new6 = new Task("Title", "Description", now, PriorityLevel.LOW);
+        p.insert(new1);
+        p.shiftUpPriority(p.getSize());
+        p.insert(new2);
+        p.shiftUpPriority(p.getSize());
+        p.insert(new3);
+        p.shiftUpPriority(p.getSize());
+        p.insert(new4);
+        p.shiftUpPriority(p.getSize());
+        p.insert(new5);
+        p.shiftUpPriority(p.getSize());
+        p.insert(new6);
+        p.shiftUpPriority(p.getSize());
+        
+        for(int i = 0; i < 3; i++){
+            PriorityQueue prueba = p;
+            System.out.println("("+i+")"+prueba.getSize());
+            for(int j = 0; j < prueba.getSize(); j++) {
+                p.extractMaxPriority();
+                System.out.println("PRUEBA DENTRO "+i+""+p.getSize());
+            }
+            p = prueba;
+        }
+        
+        assertEquals(5,p.getSize());
+
+    }
+    
     
 }

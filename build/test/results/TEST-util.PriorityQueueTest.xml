@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="DESKTOP-6S530IM" name="util.PriorityQueueTest" skipped="0" tests="5" time="0.087" timestamp="2023-10-08T03:48:18">
+<testsuite errors="0" failures="1" hostname="DESKTOP-6S530IM" name="util.PriorityQueueTest" skipped="0" tests="1" time="0.083" timestamp="2023-10-08T05:17:42">
   <properties>
     <property name="libs.spring-framework300.classpath" value="C:\Program Files\NetBeans-19\netbeans\platform\modules\org-apache-commons-logging.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\cglib-2.2.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-aop-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-aspects-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-beans-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-context-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-context-support-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-core-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-expression-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-instrument-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-instrument-tomcat-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-jdbc-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-jms-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-orm-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-oxm-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-struts-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-test-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-tx-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-web-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-webmvc-3.2.18.RELEASE.jar;C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-3.0\spring-webmvc-portlet-3.2.18.RELEASE.jar" />
     <property name="javac.test.classpath" value=":build/classes:C:\Program Files\NetBeans-19\netbeans\platform\modules\ext\junit-4.13.2.jar:C:\Program Files\NetBeans-19\netbeans\platform\modules\ext\hamcrest-core-1.3.jar" />
@@ -23,7 +23,7 @@
     <property name="libs.JWSAntTasks.javadoc" value="" />
     <property name="sun.boot.library.path" value="C:\Program Files\Java\zulu21.28.85-ca-fx-jdk21.0.0-win_x64\zulu21.28.85-ca-fx-jdk21.0.0-win_x64\bin" />
     <property name="platform.home" value="C:\Program Files\Java\zulu21.28.85-ca-fx-jdk21.0.0-win_x64\zulu21.28.85-ca-fx-jdk21.0.0-win_x64" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner util.PriorityQueueTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Compumax\Desktop\TI1-Discretas\build\test\results\TEST-util.PriorityQueueTest.xml crashfile=C:\Users\Compumax\Desktop\TI1-Discretas\build\junitvmwatcher1643942463817456436.properties propsfile=C:\Users\Compumax\Desktop\TI1-Discretas\build\junit12665971047153367652.properties" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner util.PriorityQueueTest methods=testForShowTasks skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false showoutput=true outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=true formatter=org.apache.tools.ant.taskdefs.optional.junit.BriefJUnitResultFormatter formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,C:\Users\Compumax\Desktop\TI1-Discretas\build\test\results\TEST-util.PriorityQueueTest.xml crashfile=C:\Users\Compumax\Desktop\TI1-Discretas\build\junitvmwatcher7826488055958179254.properties propsfile=C:\Users\Compumax\Desktop\TI1-Discretas\build\junit15879677486297302354.properties" />
     <property name="javafx.enable.concurrent.external.runs" value="false" />
     <property name="jdk.debug" value="release" />
     <property name="libs.spring-framework300.src" value="" />
@@ -72,7 +72,6 @@
     <property name="compile.on.save" value="true" />
     <property name="libs.testng.maven-pom" value="" />
     <property name="org.openide.version" value="deprecated" />
-    <property name="test.includes" value="util/PriorityQueueTest.java" />
     <property name="run.classpath" value="dist/IntegradoraDiscretas1.jar::build/classes" />
     <property name="libs.jaxb.src" value="" />
     <property name="sun.awt.enableExtraMouseButtons" value="true" />
@@ -220,7 +219,7 @@
     <property name="libs.jsp-compilation-syscp.classpath" value="C:\Program Files\NetBeans-19\netbeans\extide\ant\lib\ant.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\servlet4.0-jsp2.3-api.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\glassfish-jspparser-5.1.0.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\jstl-impl.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\jsf-2_2\javax.faces.jar" />
     <property name="libs.jsp-compilation.classpath" value="C:\Program Files\NetBeans-19\netbeans\extide\ant\lib\ant.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\servlet4.0-jsp2.3-api.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\glassfish-jspparser-5.1.0.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\jsf-2_2\javax.faces.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\jstl-api.jar;C:\Program Files\NetBeans-19\netbeans\extide\ant\lib\ant-launcher.jar" />
     <property name="libs.javaee-api-6.0.classpath" value="C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\javaee-api-6.0.jar" />
-    <property name="javac.includesfile.binary" value="C:\Users\Compumax\Desktop\TI1-Discretas\null1064235063" />
+    <property name="javac.includesfile.binary" value="C:\Users\Compumax\Desktop\TI1-Discretas\null1755445203" />
     <property name="libs.javaee-api-7.0.classpath" value="C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\javaee-api-7.0.jar" />
     <property name="sun.cpu.isalist" value="amd64" />
     <property name="libs.restapi.maven-pom" value="" />
@@ -360,6 +359,7 @@
     <property name="line.separator" value="&#xd;&#xa;" />
     <property name="javadoc.additionalparam" value="" />
     <property name="libs.spring-webmvc5.0.classpath" value="C:\Program Files\NetBeans-19\netbeans\java\modules\ext\spring-5\spring-webmvc-5.2.9.RELEASE.jar" />
+    <property name="test.method" value="testForShowTasks" />
     <property name="javac.debug" value="true" />
     <property name="libs.restlib.maven-pom" value="" />
     <property name="libs.testng.classpath" value="C:\Program Files\NetBeans-19\netbeans\platform\modules\ext\testng-6.14.3.jar;C:\Program Files\NetBeans-19\netbeans\platform\modules\ext\jcommander-1.78.jar" />
@@ -367,8 +367,8 @@
     <property name="user.name" value="Juan David Quintero" />
     <property name="build.classes.dir" value="build/classes" />
     <property name="javadoc.windowtitle" value="" />
-    <property name="nb.junit.single" value="false" />
-    <property name="nb.internal.action.name" value="run.single" />
+    <property name="nb.junit.single" value="true" />
+    <property name="nb.internal.action.name" value="run.single.method" />
     <property name="libs.javaee-api-8.0.maven-pom" value="" />
     <property name="libs.jaxws21.src" value="" />
     <property name="javafx.disable.concurrent.runs" value="false" />
@@ -430,13 +430,13 @@
     <property name="javac.classpath" value="" />
     <property name="libs.jakartaee-web-api-8.0.classpath" value="C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\jakarta.jakartaee-web-api-8.0.0.jar" />
     <property name="dist.jlink.dir" value="dist/jlink" />
-    <property name="nb.junit.batch" value="true" />
+    <property name="nb.junit.batch" value="false" />
     <property name="libs.jakartaee-web-api-10.0.maven-pom" value="" />
     <property name="build.test.classes.dir" value="build/test/classes" />
     <property name="javafx.application.implementation.version" value="1.0" />
     <property name="javafx.preloader.type" value="none" />
     <property name="libs.spring-framework300.maven-pom" value="" />
-    <property name="ant.project.invoked-targets" value="test-single" />
+    <property name="ant.project.invoked-targets" value="test-single-method" />
     <property name="libs.jstl.classpath" value="C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\jstl-impl.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\jstl-api.jar" />
     <property name="ap.cmd.line.internal" value="" />
     <property name="libs.PostgreSQLDriver.src" value="" />
@@ -468,11 +468,20 @@
     <property name="libs.jsp-compiler.classpath" value="C:\Program Files\NetBeans-19\netbeans\enterprise\ant\extra\jspcompile.jar" />
     <property name="libs.javaee-endorsed-api-6.0.classpath" value="C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\javaee6-endorsed\javax.annotation.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\javaee6-endorsed\jaxb-api-osgi.jar;C:\Program Files\NetBeans-19\netbeans\enterprise\modules\ext\javaee6-endorsed\webservices-api-osgi.jar" />
   </properties>
-  <testcase classname="util.PriorityQueueTest" name="testInsertPriority" time="0.009" />
-  <testcase classname="util.PriorityQueueTest" name="testAllDeadLine" time="0.0" />
-  <testcase classname="util.PriorityQueueTest" name="testRemovePriority" time="0.0" />
-  <testcase classname="util.PriorityQueueTest" name="testInsertMoreCasesPriority" time="0.0" />
-  <testcase classname="util.PriorityQueueTest" name="testModify" time="0.0" />
-  <system-out><![CDATA[]]></system-out>
+  <testcase classname="util.PriorityQueueTest" name="testForShowTasks" time="0.017">
+    <failure message="expected:&lt;5&gt; but was:&lt;0&gt;" type="junit.framework.AssertionFailedError">junit.framework.AssertionFailedError: expected:&lt;5&gt; but was:&lt;0&gt;
+	at util.PriorityQueueTest.testForShowTasks(PriorityQueueTest.java:202)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+</failure>
+  </testcase>
+  <system-out><![CDATA[(0)5
+PRUEBA DENTRO 04
+PRUEBA DENTRO 03
+PRUEBA DENTRO 02
+(1)2
+PRUEBA DENTRO 11
+(2)1
+PRUEBA DENTRO 20
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>

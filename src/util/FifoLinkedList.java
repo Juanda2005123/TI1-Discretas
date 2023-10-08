@@ -23,7 +23,7 @@ public class FifoLinkedList<T> {
         }
     }
     
-    public void dequeue() throws EmptyListException{ //Remove
+    public void dequeue() throws EmptyListException{ //Remove by Fifo order
         if(isEmpty()){
             throw new EmptyListException("The list is empty");
         } else {
@@ -51,6 +51,23 @@ public class FifoLinkedList<T> {
                 last.setValue(value);
             } else {
                 first.modify(node);
+            }
+        }
+    }
+    
+    public void remove(T value) { //Remove if user deletes a task
+        DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(value);
+        if(!isEmpty()){
+            if(first.getId()==node.getId()){
+                first = first.getNext();
+                first.getPrev().setNext(null);
+                first.setPrev(null);
+            } else if(last.getId()==node.getId()){
+                last = last.getPrev();
+                last.getNext().setPrev(null);
+                last.setNext(null);
+            } else {
+                first.removeNode(value);
             }
         }
     }
