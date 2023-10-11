@@ -24,7 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import util.DoubleLinkedNode;
 import util.FifoLinkedList;
-
+import util.Stack;
 
 
 //Normal
@@ -57,7 +57,7 @@ public class Controller implements Initializable{
     private PriorityQueue showANDCompleteByPriority;
     private PriorityQueue showByDeadLine;
     private FifoLinkedList<Task> completeNonPriorityTask;
-    
+    private Stack<T> undoData;
     private int tasksId;
    
 
@@ -70,7 +70,7 @@ public class Controller implements Initializable{
         showByDeadLine = new PriorityQueue();
         //Complete tasks
         completeNonPriorityTask = new FifoLinkedList<>();
-        
+        undoData = new Stack<T>();
         tasksId = 0;
         
     }
@@ -116,6 +116,8 @@ public class Controller implements Initializable{
                                
                 addTaskToStructures(newTask);
                 filterTasksInside();
+                Undo data = new Undo(newTask, DataType.ADD);
+                undoData.push(data);
               
             }
             

@@ -1,8 +1,8 @@
 package util;
 
-public class Stack {
+public class Stack<T> {
 
-    private DoubleLinkedNode top;
+    private DoubleLinkedNode<T> top;
     private int size;
 
     public Stack(){
@@ -38,18 +38,32 @@ public class Stack {
     }
 
     public T pop(){
+
         if(isEmpty()){
 
             throw new IllegalStateException("The stack is empty");
 
         }
 
-        T node = getTop();
+        T node = getTop().getValue();
         top = top.getNext();
         size--;
 
         return node;
 
+    }
+
+    public T peek(){
+
+        if(isEmpty()){
+
+            throw new IllegalStateException("The stack is empty");
+
+        }
+
+        T ans = top.getValue();
+
+        return ans;
     }
 
     private void setTop(DoubleLinkedNode<T> newTop){
