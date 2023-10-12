@@ -109,8 +109,11 @@ public class PriorityQueue {
             while(parent!=null&&(i > 0 && (child.getValue().compareToDeadLine(parent.getValue()))<=0)){
                 swap(parent(i),i);
                 i = parent(i);
-
-                parent = priority.get(parent(i));
+                if(i!=0){
+                    parent = priority.get(parent(i));
+                } else {
+                    parent=null;
+                }
                 child = priority.get(i);
             }
 
@@ -172,20 +175,20 @@ public class PriorityQueue {
        
         
         if(leftTask!=null){
-            if(leftTask.compareToDeadLine(priority.get(maxIndex).getValue())==1){
+            if(leftTask.compareToDeadLine(priority.get(maxIndex).getValue())==-1){
                 maxIndex = left;
             }
         }
         
         if(rightTask!=null){
-           if(rightTask.compareToDeadLine(priority.get(maxIndex).getValue())==1){
+           if(rightTask.compareToDeadLine(priority.get(maxIndex).getValue())==-1){
                maxIndex = right;
            }
         }
         
         if(i != maxIndex){
             swap(i,maxIndex);
-            shiftDownPriority(maxIndex);
+            shiftDownDeadLine(maxIndex);
         }
     }
     
