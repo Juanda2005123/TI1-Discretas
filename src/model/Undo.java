@@ -1,10 +1,10 @@
 package model;
 
-public class Undo {
-    private Task data;
+public class Undo<T> {
+    private T data;
     private DataType dataType;
 
-    public Undo(Task data, DataType dataType){
+    public Undo(T data, DataType dataType){
 
         this.data = data;
         this.dataType = dataType;
