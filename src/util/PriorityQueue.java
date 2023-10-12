@@ -28,15 +28,7 @@ public class PriorityQueue {
     public Task getTask(int i){
         return priority.get(i).getValue();
     }
-    
-    public void setArraylist(ArrayList<DoubleLinkedNode<Task>> list){
-        priority = list;
-    }
-    
-    public ArrayList<DoubleLinkedNode<Task>> getArrayList(){
-        return priority;
-    }
-    
+        
     public int parent(int i){
       return (i - 1) / 2;
     }
