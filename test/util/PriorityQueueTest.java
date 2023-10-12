@@ -18,8 +18,6 @@ import static org.junit.Assert.*;
  * @author Juan David Quintero
  */
 public class PriorityQueueTest {
-    
-    public PriorityQueueTest() {}
 
     
     @Test

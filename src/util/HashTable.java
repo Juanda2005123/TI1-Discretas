@@ -9,20 +9,13 @@ public class HashTable<T> {
         hashTable = new DoubleLinkedNode[23]; //A siempre ganar como el 23
     }
 
-    public int hashFunction(String key){ //Title
-        int answer = 0;
-        char[] chars = key.toCharArray();
-        for(int i = 0; i < chars.length; i++){
-            answer += chars[i];
-        }
-        answer %= 23;
-
-        return answer;
+    public int hashFunction(int key){ //Title
+        return key%23;
     }
 
     public void add(T newTask){
         DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(newTask);
-        int key = hashFunction(node.getTitle());
+        int key = hashFunction(node.getId());
 
         if(hashTable[key]==null){
             hashTable[key] = node;
@@ -34,7 +27,7 @@ public class HashTable<T> {
     public void remove(T value) {
         DoubleLinkedNode<T> node = new DoubleLinkedNode<T>(value);
 
-        int key = hashFunction(node.getTitle());
+        int key = hashFunction(node.getId());
 
         DoubleLinkedNode<T> temp = hashTable[key];
 
@@ -50,7 +43,7 @@ public class HashTable<T> {
     public void modify(T task1){
         
         DoubleLinkedNode<T> newNode = new DoubleLinkedNode<T>(task1);
-        int key = hashFunction(newNode.getTitle());
+        int key = hashFunction(newNode.getId());
         
         DoubleLinkedNode<T> temp = hashTable[key];
         
@@ -58,6 +51,7 @@ public class HashTable<T> {
             
             if(temp.getId()==newNode.getId()){
                 temp.setValue(task1);
+                
                 hashTable[key] = temp;
             } else {
                 temp.modify(newNode);
