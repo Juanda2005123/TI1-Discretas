@@ -1,4 +1,4 @@
-package integradoradiscretas1;
+package ui;
 
 import javafx.application.Application;
 import javafx.scene.Parent;

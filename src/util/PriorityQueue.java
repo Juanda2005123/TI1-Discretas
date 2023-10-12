@@ -136,13 +136,13 @@ public class PriorityQueue {
         
         
         if(leftTask!=null){
-            if(left <= size && leftTask.compareTo(priority.get(maxIndex).getValue())==1){
+            if(leftTask.compareTo(priority.get(maxIndex).getValue())==1){
                 maxIndex = left;
             }
         }
         
         if(rightTask!=null){
-           if(right <= size && rightTask.compareTo(priority.get(maxIndex).getValue())==1){
+           if(rightTask.compareTo(priority.get(maxIndex).getValue())==1){
                maxIndex = right;
            }
         }
@@ -172,13 +172,13 @@ public class PriorityQueue {
        
         
         if(leftTask!=null){
-            if(left <= size && leftTask.compareToDeadLine(priority.get(maxIndex).getValue())==1){
+            if(leftTask.compareToDeadLine(priority.get(maxIndex).getValue())==1){
                 maxIndex = left;
             }
         }
         
         if(rightTask!=null){
-           if(right <= size && rightTask.compareToDeadLine(priority.get(maxIndex).getValue())==1){
+           if(rightTask.compareToDeadLine(priority.get(maxIndex).getValue())==1){
                maxIndex = right;
            }
         }

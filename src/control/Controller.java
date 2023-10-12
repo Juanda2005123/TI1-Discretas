@@ -1,4 +1,4 @@
-package model;
+package control;
 
 //Interfaz Grafica
 import exceptions.EmptyListException;
@@ -22,6 +22,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.PriorityLevel;
+import model.Task;
 import util.DoubleLinkedNode;
 import util.FifoLinkedList;
 
