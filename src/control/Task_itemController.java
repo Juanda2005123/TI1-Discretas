@@ -132,7 +132,7 @@ public class Task_itemController implements Initializable {
             boolean delete = cDelete.isDelete();
             
             if(delete&&(parent != null)){
-                parent.handleTaskDelete(hBox, task);
+                parent.handleTaskDelete(task);
             }
                 
             

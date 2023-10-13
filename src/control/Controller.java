@@ -91,14 +91,15 @@ public class Controller implements Initializable{
                 Trio trio = (Trio) temp.getData();
                 Task newTask = (Task) trio.getNewTask();
                 Task oddTask = (Task) trio.getOddTask();
+                
                 handleTaskEditUndo(oddTask, newTask);
             }
             
             if(temp.getDataType() == DataType.ADD){
-                Trio trio = (Trio) temp.getData();
-                Task newTask = (Task) trio.getNewTask();
-                HBox hBox = (HBox) trio.getTempHBox();
-                handleTaskDeleteUndo(hBox, newTask);
+                Task task = (Task)temp.getData();
+                
+                
+                handleTaskDeleteUndo(task);
             }
             
         }
@@ -119,22 +120,22 @@ public class Controller implements Initializable{
         filterTasksInside();
     }
     
-    public void handleTaskDelete(HBox hbox, Task task) {
-        Trio trio = new Trio(task, hbox);
-        Undo data = new Undo(trio, DataType.DELETE);
+    public void handleTaskDelete(Task task) {
+        Undo data = new Undo(task, DataType.DELETE);
         undoData.push(data);
-        tasksLayout.getChildren().remove(hbox);
+        
         removeTaskToStructures(task);
+        filterTasksInside();
     }
 
-    public void handleTaskDeleteUndo(HBox hbox, Task task) {
-        tasksLayout.getChildren().remove(hbox);
+    public void handleTaskDeleteUndo(Task task) {
+        
         removeTaskToStructures(task);
+        filterTasksInside();
     }
 
     public void addTaskUndo(Task newTask){
-        newTask.setId(tasksId);
-        tasksId++;
+        
         addTaskToStructures(newTask);
         filterTasksInside();
 

@@ -5,15 +5,16 @@
         <group>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/PriorityLevel.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/test/util/FifoLinkedListTest.java</file>
-            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/DataType.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/Undo.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/util/Stack.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/test/util/HashTableTest.java</file>
-            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/ui/IntegradoraDiscretas1.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/values/styles.css</file>
-            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/test/util/PriorityQueueTest.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/control/Controller.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/util/PriorityQueue.java</file>
+            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/control/Task_itemController.java</file>
+            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/DataType.java</file>
+            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/ui/IntegradoraDiscretas1.java</file>
+            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/test/util/PriorityQueueTest.java</file>
             <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/model/Trio.java</file>
         </group>
     </open-files>
