@@ -9,55 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="500.0" styleClass="black-background" stylesheets="@../values/styles.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Controller">
-   <top>
-      <HBox prefHeight="150.0" prefWidth="500.0" BorderPane.alignment="CENTER">
-         <children>
-            <VBox alignment="CENTER" prefHeight="150.0" prefWidth="844.0" spacing="10.0">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="107.0" text="Tasks" textAlignment="CENTER" textFill="#b2c6ff" textOverrun="CENTER_ELLIPSIS">
-                     <font>
-                        <Font name="Trebuchet MS Bold Italic" size="39.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets left="30.0" right="30.0" top="30.0" />
-                     </VBox.margin>
-                  </Label>
-                  <HBox alignment="CENTER" prefHeight="82.0" prefWidth="500.0" spacing="20.0" styleClass="darker-light-black-background" stylesheets="@../values/styles.css">
-                     <children>
-                        <Button fx:id="filterTasks" contentDisplay="CENTER" mnemonicParsing="false" onAction="#filterTasks" prefHeight="45.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="DeadLine">
-                           <font>
-                              <Font name="Trebuchet MS" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="finishPriority" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finishPriorityTask" prefHeight="45.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="Finish priority">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Trebuchet MS" size="12.0" />
-                           </font>
-                        </Button>
-                        <Button fx:id="finishNonPriority" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finishNonPriorityTask" prefHeight="45.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="Finish non-priority">
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Trebuchet MS" size="12.0" />
-                           </font>
-                        </Button>
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="8.0" />
-                     </VBox.margin>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="150.0" prefWidth="312.0" />
-         </children>
-      </HBox>
-   </top>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="500.0" styleClass="black-background" stylesheets="@../values/styles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="model.Controller">
    <bottom>
       <HBox prefHeight="100.0" prefWidth="200.0">
          <children>
@@ -94,41 +46,89 @@
          <children>
             <ScrollPane prefHeight="550.0" prefWidth="500.0" styleClass="transparent" stylesheets="@../values/styles.css">
                <content>
-                  <VBox fx:id="tasksLayout" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="548.0" prefWidth="498.0" styleClass="black-background" stylesheets="@../values/styles.css">
-                     <children>
-                        <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="494.0" styleClass="darker-light-black-background" stylesheets="@../values/styles.css">
-                           <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" text="Title" textAlignment="CENTER" textFill="#788cdc">
-                                 <font>
-                                    <Font name="Trebuchet MS" size="20.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="64.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" text="Deadline" textAlignment="CENTER" textFill="#788cdc">
-                                 <font>
-                                    <Font name="Trebuchet MS" size="20.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets left="64.0" right="64.0" />
-                                 </HBox.margin>
-                              </Label>
-                              <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" text="Priority" textAlignment="CENTER" textFill="#788cdc">
-                                 <font>
-                                    <Font name="Trebuchet MS" size="20.0" />
-                                 </font>
-                                 <HBox.margin>
-                                    <Insets right="64.0" />
-                                 </HBox.margin>
-                              </Label>
-                           </children>
-                        </HBox>
-                     </children>
-                  </VBox>
+                  <VBox fx:id="tasksLayout" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="498.0" prefWidth="498.0" styleClass="black-background" stylesheets="@../values/styles.css" />
                </content>
             </ScrollPane>
          </children>
       </HBox>
    </center>
+   <top>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox prefHeight="150.0" prefWidth="500.0">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="150.0" prefWidth="844.0" spacing="10.0">
+                     <children>
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="61.0" prefWidth="107.0" text="Tasks" textAlignment="CENTER" textFill="#b2c6ff" textOverrun="CENTER_ELLIPSIS">
+                           <font>
+                              <Font name="Trebuchet MS Bold Italic" size="39.0" />
+                           </font>
+                           <VBox.margin>
+                              <Insets left="30.0" right="30.0" top="30.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox alignment="CENTER" prefHeight="82.0" prefWidth="500.0" spacing="20.0" styleClass="darker-light-black-background" stylesheets="@../values/styles.css">
+                           <children>
+                              <Button fx:id="filterTasks" contentDisplay="CENTER" mnemonicParsing="false" onAction="#filterTasks" prefHeight="45.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="DeadLine">
+                                 <font>
+                                    <Font name="Trebuchet MS" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="finishPriority" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finishPriorityTask" prefHeight="45.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="Finish priority">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Trebuchet MS" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button fx:id="finishNonPriority" contentDisplay="CENTER" mnemonicParsing="false" onAction="#finishNonPriorityTask" prefHeight="45.0" prefWidth="120.0" styleClass="buttonRound" stylesheets="@../values/styles.css" text="Finish non-priority">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                                 <font>
+                                    <Font name="Trebuchet MS" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="8.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="150.0" prefWidth="312.0" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="55.0" prefWidth="494.0" styleClass="darker-light-black-background" stylesheets="@../values/styles.css">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" text="Title" textAlignment="CENTER" textFill="#788cdc">
+                     <font>
+                        <Font name="Trebuchet MS" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="64.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" text="Deadline" textAlignment="CENTER" textFill="#788cdc">
+                     <font>
+                        <Font name="Trebuchet MS" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="64.0" right="64.0" />
+                     </HBox.margin>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="30.0" prefWidth="90.0" text="Priority" textAlignment="CENTER" textFill="#788cdc">
+                     <font>
+                        <Font name="Trebuchet MS" size="20.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets right="64.0" />
+                     </HBox.margin>
+                  </Label>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </top>
 </BorderPane>
