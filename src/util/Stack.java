@@ -23,16 +23,17 @@ public class Stack<T> {
         if(top != null){
 
             DoubleLinkedNode<T> newNode = new DoubleLinkedNode<T>(node);
-            DoubleLinkedNode<T> tempNode = new DoubleLinkedNode<T>(null);
-            tempNode = top;
+            DoubleLinkedNode<T> tempNode = top;
+            
             newNode.setNext(tempNode);
-            setTop(newNode);
+            top = newNode;
+            size++;
 
         }else {
 
             DoubleLinkedNode<T> newNode = new DoubleLinkedNode<T>(node);
-            setTop(newNode);
-
+            top = newNode;
+            size++;
         }
 
     }

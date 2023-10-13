@@ -19,12 +19,12 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-<<<<<<< HEAD:src/control/Controller.java
+import model.DataType;
 import model.PriorityLevel;
 import model.Task;
+import model.Trio;
+import model.Undo;
 import util.DoubleLinkedNode;
-=======
->>>>>>> Feature/Fx:src/model/Controller.java
 import util.FifoLinkedList;
 import util.Stack;
 
@@ -76,30 +76,34 @@ public class Controller implements Initializable{
         tasksId = 0;
         
     }
-
-    public void undo(){
-        Undo temp = new Undo<>(null, null);
-        temp = undoData.pop();
+    
+    @FXML
+    public void undoAction(ActionEvent event) {
+        Undo temp = undoData.pop();
         if(temp != null){
             if(temp.getDataType() == DataType.DELETE){
 
                 Task task = (Task) temp.getData();
                 addTaskUndo(task);
             }
+            
             if(temp.getDataType() == DataType.MODIFY){
                 Trio trio = (Trio) temp.getData();
                 Task newTask = (Task) trio.getNewTask();
                 Task oddTask = (Task) trio.getOddTask();
                 handleTaskEditUndo(oddTask, newTask);
             }
+            
             if(temp.getDataType() == DataType.ADD){
                 Trio trio = (Trio) temp.getData();
                 Task newTask = (Task) trio.getNewTask();
                 HBox hBox = (HBox) trio.getTempHBox();
                 handleTaskDeleteUndo(hBox, newTask);
             }
+            
         }
     }
+    
     public void handleTaskEdit(Task task, Task oldOne){
         Trio trio =  new Trio(task, oldOne);
         Undo data = new Undo(trio, DataType.MODIFY);
@@ -384,6 +388,8 @@ public class Controller implements Initializable{
         }
         
     }
+
+    
 
     
  
