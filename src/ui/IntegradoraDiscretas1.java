@@ -9,6 +9,7 @@ import javafx.fxml.FXMLLoader;
 /**
  *
  * @author Juan David Quintero
+ * @author Juan Andrés Cano R
  */
 public class IntegradoraDiscretas1 extends Application {
     

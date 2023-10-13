@@ -4,29 +4,29 @@ package control;
 import exceptions.EmptyListException;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+<<<<<<< HEAD:src/control/Controller.java
 import model.PriorityLevel;
 import model.Task;
 import util.DoubleLinkedNode;
+=======
+>>>>>>> Feature/Fx:src/model/Controller.java
 import util.FifoLinkedList;
-
+import util.Stack;
 
 
 //Normal
@@ -59,7 +59,7 @@ public class Controller implements Initializable{
     private PriorityQueue showANDCompleteByPriority;
     private PriorityQueue showByDeadLine;
     private FifoLinkedList<Task> completeNonPriorityTask;
-    
+    private Stack<Undo> undoData;
     private int tasksId;
    
 
@@ -72,22 +72,71 @@ public class Controller implements Initializable{
         showByDeadLine = new PriorityQueue();
         //Complete tasks
         completeNonPriorityTask = new FifoLinkedList<>();
-        
+        undoData = new Stack<>();
         tasksId = 0;
         
     }
 
+    public void undo(){
+        Undo temp = new Undo<>(null, null);
+        temp = undoData.pop();
+        if(temp != null){
+            if(temp.getDataType() == DataType.DELETE){
+
+                Task task = (Task) temp.getData();
+                addTaskUndo(task);
+            }
+            if(temp.getDataType() == DataType.MODIFY){
+                Trio trio = (Trio) temp.getData();
+                Task newTask = (Task) trio.getNewTask();
+                Task oddTask = (Task) trio.getOddTask();
+                handleTaskEditUndo(oddTask, newTask);
+            }
+            if(temp.getDataType() == DataType.ADD){
+                Trio trio = (Trio) temp.getData();
+                Task newTask = (Task) trio.getNewTask();
+                HBox hBox = (HBox) trio.getTempHBox();
+                handleTaskDeleteUndo(hBox, newTask);
+            }
+        }
+    }
     public void handleTaskEdit(Task task, Task oldOne){
-        
+        Trio trio =  new Trio(task, oldOne);
+        Undo data = new Undo(trio, DataType.MODIFY);
+
+        undoData.push(data);
+
+        modifyTaskToStructures(task, oldOne);
+        filterTasksInside();
+    }
+
+    public void handleTaskEditUndo(Task task, Task oldOne){
         modifyTaskToStructures(task, oldOne);
         filterTasksInside();
     }
     
     public void handleTaskDelete(HBox hbox, Task task) {
-        
+        Trio trio = new Trio(task, hbox);
+        Undo data = new Undo(trio, DataType.DELETE);
+        undoData.push(data);
         tasksLayout.getChildren().remove(hbox);
         removeTaskToStructures(task);
     }
+
+    public void handleTaskDeleteUndo(HBox hbox, Task task) {
+        tasksLayout.getChildren().remove(hbox);
+        removeTaskToStructures(task);
+    }
+
+    public void addTaskUndo(Task newTask){
+        newTask.setId(tasksId);
+        tasksId++;
+        addTaskToStructures(newTask);
+        filterTasksInside();
+
+
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -118,6 +167,8 @@ public class Controller implements Initializable{
                                
                 addTaskToStructures(newTask);
                 filterTasksInside();
+                Undo data = new Undo(newTask, DataType.ADD);
+                undoData.push(data);
               
             }
             
