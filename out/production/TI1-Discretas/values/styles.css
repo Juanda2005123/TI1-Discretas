@@ -1,0 +1,37 @@
+.buttonRound{
+    -fx-background-color: #788CDC;
+    -fx-background-radius: 100;
+}
+
+.buttonBack{
+    -fx-background-color: #788CDC;
+    -fx-background-radius: 50;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.black-background{
+    -fx-background-color: #000000; 
+}
+
+.darker-light-black-background{
+    -fx-background-color: #141414;
+}
+
+.light-black-background{
+    -fx-background-color: #212121;
+    -fx-background-radius: 5;
+
+}
+
+.border-Button{
+    -fx-border-color: #212121;
+    -fx-background-color: #000000;
+    -fx-border-radius: 5;
+}
+
+.text-color{
+    -fx-text-fill: #e1e1e1;
+}
