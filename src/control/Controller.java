@@ -4,29 +4,27 @@ package control;
 import exceptions.EmptyListException;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
 import javafx.event.ActionEvent;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.DataType;
 import model.PriorityLevel;
 import model.Task;
-import util.DoubleLinkedNode;
+import model.Trio;
+import model.Undo;
 import util.FifoLinkedList;
-
+import util.Stack;
 
 
 //Normal
@@ -59,7 +57,7 @@ public class Controller implements Initializable{
     private PriorityQueue showANDCompleteByPriority;
     private PriorityQueue showByDeadLine;
     private FifoLinkedList<Task> completeNonPriorityTask;
-    
+    private Stack<Undo> undoData;
     private int tasksId;
    
 
@@ -72,22 +70,86 @@ public class Controller implements Initializable{
         showByDeadLine = new PriorityQueue();
         //Complete tasks
         completeNonPriorityTask = new FifoLinkedList<>();
-        
+        undoData = new Stack<>();
         tasksId = 0;
         
     }
-
+    
+    @FXML
+    public void undoAction(ActionEvent event) {
+        try {
+            Undo temp = undoData.pop();
+            if(temp != null){
+                if(null != temp.getDataType())switch (temp.getDataType()) {
+                    case DELETE:{
+                        Task task = (Task) temp.getData();
+                        addTaskUndo(task);
+                        break;
+                    }
+                    case MODIFY:
+                        Trio trio = (Trio) temp.getData();
+                        Task newTask = (Task) trio.getNewTask();
+                        Task oddTask = (Task) trio.getOddTask();
+                        
+                        handleTaskEditUndo(oddTask, newTask);
+                        break;
+                    case ADD:{
+                        Task task = (Task)temp.getData();
+                        handleTaskDeleteUndo(task);
+                        break;
+                    }
+                    default:
+                        break;
+                }
+                
+            }
+        } catch (EmptyListException ex) {            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("No more actions");
+            alert.setContentText("No more actions to undo");
+            alert.show();
+        }
+    }
+    
     public void handleTaskEdit(Task task, Task oldOne){
-        
+        Trio trio =  new Trio(task, oldOne);
+        Undo data = new Undo(trio, DataType.MODIFY);
+
+        undoData.push(data);
+
+        modifyTaskToStructures(task, oldOne);
+        filterTasksInside();
+    }
+
+    public void handleTaskEditUndo(Task task, Task oldOne){
+                            
         modifyTaskToStructures(task, oldOne);
         filterTasksInside();
     }
     
-    public void handleTaskDelete(HBox hbox, Task task) {
+    public void handleTaskDelete(Task task) {
+        Undo data = new Undo(task, DataType.DELETE);
+        undoData.push(data);
         
-        tasksLayout.getChildren().remove(hbox);
         removeTaskToStructures(task);
+        filterTasksInside();
     }
+
+    public void handleTaskDeleteUndo(Task task) {
+        
+        removeTaskToStructures(task);
+        filterTasksInside();
+    }
+
+    public void addTaskUndo(Task newTask){
+        
+        addTaskToStructures(newTask);
+        filterTasksInside();
+
+
+    }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -111,13 +173,17 @@ public class Controller implements Initializable{
             stage.showAndWait();
             
             Task newTask = controllerAdd.getTask();
-            newTask.setId(tasksId);
-            tasksId++;
+            
             
             if(newTask != null){
                                
+                newTask.setId(tasksId);
+                tasksId++;
+                
                 addTaskToStructures(newTask);
                 filterTasksInside();
+                Undo data = new Undo(newTask, DataType.ADD);
+                undoData.push(data);
               
             }
             
@@ -232,7 +298,10 @@ public class Controller implements Initializable{
                 //Complete tasks
                 completeNonPriorityTask.remove(task);
                 //REMOVE IN STRUCTURES
-
+                
+                Undo data = new Undo(task, DataType.DELETE);
+                undoData.push(data);
+                
                 filterTasksInside();
             }
         } catch(EmptyListException e){
@@ -258,6 +327,9 @@ public class Controller implements Initializable{
             //show tasks
             showByDeadLine.removeDeadLine(task);
             //REMOVE IN STRUCTURES
+            
+            Undo data = new Undo(task, DataType.DELETE);
+            undoData.push(data);
             
             filterTasksInside();
             
@@ -311,6 +383,7 @@ public class Controller implements Initializable{
     
     public void modifyTaskToStructures(Task task, Task oldOne){
         try {
+                     
             tasks.modify(task);//HashTable
             
             //Show and complete tasks
@@ -327,12 +400,16 @@ public class Controller implements Initializable{
                     completeNonPriorityTask.remove(task);
                 }
                 
+            } else if(task.getPriority()==PriorityLevel.NON){
+                completeNonPriorityTask.enqueue(task);
             }
         } catch(EmptyListException e){
             e.printStackTrace();
         }
         
     }
+
+    
 
     
  

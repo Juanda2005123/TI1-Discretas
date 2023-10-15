@@ -27,10 +27,19 @@ public class FifoLinkedList<T> {
         if(isEmpty()){
             throw new EmptyListException("The list is empty");
         } else {
-            DoubleLinkedNode<T> temp = last.getPrev();
-            temp.setNext(null);
-            last.setPrev(null);
-            last = temp;
+            if(last==first){
+                last=null;
+                first=null;
+            } else {
+                DoubleLinkedNode<T> temp = last.getPrev();
+                if(temp!=null){
+                    temp.setNext(null);
+                }
+                last.setPrev(null);
+                last = temp;
+            }
+            
+            
         }
     }
     
@@ -60,8 +69,10 @@ public class FifoLinkedList<T> {
         if(!isEmpty()){
             if(first.getId()==node.getId()){
                 first = first.getNext();
-                first.getPrev().setNext(null);
-                first.setPrev(null);
+                if(first!=null){
+                    first.getPrev().setNext(null);
+                    first.setPrev(null);
+                }
             } else if(last.getId()==node.getId()){
                 last = last.getPrev();
                 last.getNext().setPrev(null);
@@ -73,7 +84,7 @@ public class FifoLinkedList<T> {
     }
 
     public boolean isEmpty(){
-        return (first==null);
+        return (first==null)&&(last==null);
     }
     
 

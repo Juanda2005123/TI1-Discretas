@@ -53,6 +53,21 @@ public class DoubleLinkedNode<T> {
             }
         }
     }
+    
+    public T search(DoubleLinkedNode<T> searchNode){
+        
+        DoubleLinkedNode<T> temp = this.getNext();
+        T returnV = null;
+        if(temp!=null){
+            if(temp.getId()==searchNode.getId()){
+                returnV = temp.getValue();
+            } else {
+                returnV = this.getNext().search(searchNode);
+            }
+        }
+        return returnV;
+        
+    }
 
     public DoubleLinkedNode<T> getNext() {
         return next;

@@ -20,10 +20,18 @@ public class Task implements Comparable{
         this.priority = priority;
         this.deadLine = deadLine;
         this.description = description;
-        //format = new SimpleDateFormat("dd--mm-yyyy");
         imgSrc = ("/img/edit.png");
         setPriorityNum();
         
+    }
+    
+    public Task(Task newTask){
+        this.title = newTask.getTitle();
+        this.priority = newTask.getPriority();
+        this.deadLine = newTask.getDeadLine();
+        this.description = newTask.getDescription();
+        imgSrc = ("/img/edit.png");
+        setPriorityNum();
     }
     
     public void setId(int id){

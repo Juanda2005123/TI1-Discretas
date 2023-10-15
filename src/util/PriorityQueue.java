@@ -28,7 +28,7 @@ public class PriorityQueue {
     public Task getTask(int i){
         return priority.get(i).getValue();
     }
-        
+    
     public int parent(int i){
       return (i - 1) / 2;
     }
