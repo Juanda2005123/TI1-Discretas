@@ -8,7 +8,6 @@ import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.scene.layout.VBox;
 import java.util.ResourceBundle;
-
 import javafx.fxml.Initializable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.HBox;
@@ -78,30 +77,38 @@ public class Controller implements Initializable{
     
     @FXML
     public void undoAction(ActionEvent event) {
-        Undo temp = undoData.pop();
-        if(temp != null){
-            if(null != temp.getDataType())switch (temp.getDataType()) {
-                case DELETE:{
-                    Task task = (Task) temp.getData();
-                    addTaskUndo(task);
+        try {
+            Undo temp = undoData.pop();
+            if(temp != null){
+                if(null != temp.getDataType())switch (temp.getDataType()) {
+                    case DELETE:{
+                        Task task = (Task) temp.getData();
+                        addTaskUndo(task);
                         break;
                     }
-                case MODIFY:
-                    Trio trio = (Trio) temp.getData();
-                    Task newTask = (Task) trio.getNewTask();
-                    Task oddTask = (Task) trio.getOddTask();
-                    
-                    handleTaskEditUndo(oddTask, newTask);
+                    case MODIFY:
+                        Trio trio = (Trio) temp.getData();
+                        Task newTask = (Task) trio.getNewTask();
+                        Task oddTask = (Task) trio.getOddTask();
+                        
+                        handleTaskEditUndo(oddTask, newTask);
                         break;
-                case ADD:{
-                    Task task = (Task)temp.getData();
-                    handleTaskDeleteUndo(task);
+                    case ADD:{
+                        Task task = (Task)temp.getData();
+                        handleTaskDeleteUndo(task);
                         break;
                     }
-                default:
-                    break;
+                    default:
+                        break;
+                }
+                
             }
-            
+        } catch (EmptyListException ex) {            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setHeaderText(null);
+            alert.setTitle("No more actions");
+            alert.setContentText("No more actions to undo");
+            alert.show();
         }
     }
     

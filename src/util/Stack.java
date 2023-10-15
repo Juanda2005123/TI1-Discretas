@@ -1,5 +1,7 @@
 package util;
 
+import exceptions.EmptyListException;
+
 public class Stack<T> {
 
     private DoubleLinkedNode<T> top;
@@ -14,7 +16,7 @@ public class Stack<T> {
         return size == 0;
     }
 
-    public int size(){
+    public int getSize(){
         return size;
     }
 
@@ -38,11 +40,11 @@ public class Stack<T> {
 
     }
 
-    public T pop(){
+    public T pop() throws EmptyListException{
 
         if(isEmpty()){
 
-            throw new IllegalStateException("The stack is empty");
+            throw new EmptyListException("The stack is empty");
 
         }
 
@@ -54,11 +56,11 @@ public class Stack<T> {
 
     }
 
-    public T peek(){
+    public T peek() throws EmptyListException{
 
         if(isEmpty()){
 
-            throw new IllegalStateException("The stack is empty");
+            throw new EmptyListException("The stack is empty");
 
         }
 
@@ -67,9 +69,6 @@ public class Stack<T> {
         return ans;
     }
 
-    private void setTop(DoubleLinkedNode<T> newTop){
-        top = newTop;
-    }
     private DoubleLinkedNode<T> getTop(){
         return top;
     }

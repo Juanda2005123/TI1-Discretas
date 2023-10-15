@@ -58,6 +58,26 @@ public class HashTable<T> {
             }
         }
     }
+    
+    public T search(T value){
+        DoubleLinkedNode<T> searchNode = new DoubleLinkedNode<T>(value);
+        int key = hashFunction(searchNode.getId());
+        
+        DoubleLinkedNode<T> temp = hashTable[key];
+        
+        T returnV = null;
+        
+        if(temp!=null){
+            
+            if(temp.getId()==searchNode.getId()){
+                returnV =  temp.getValue();
+            } else {
+                returnV = temp.search(searchNode);
+            }
+            
+        }
+        return returnV;
+    }
 
 
 
