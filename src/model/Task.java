@@ -30,6 +30,7 @@ public class Task implements Comparable{
         this.priority = newTask.getPriority();
         this.deadLine = newTask.getDeadLine();
         this.description = newTask.getDescription();
+        this.id = newTask.getId();
         imgSrc = ("/img/edit.png");
         setPriorityNum();
     }

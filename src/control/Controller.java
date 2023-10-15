@@ -90,7 +90,6 @@ public class Controller implements Initializable{
                         Trio trio = (Trio) temp.getData();
                         Task newTask = (Task) trio.getNewTask();
                         Task oddTask = (Task) trio.getOddTask();
-                        
                         handleTaskEditUndo(oddTask, newTask);
                         break;
                     case ADD:{
