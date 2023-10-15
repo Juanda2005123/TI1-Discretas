@@ -99,6 +99,8 @@ public class FifoLinkedList<T> {
                 if(first!=null){
                     first.getPrev().setNext(null);
                     first.setPrev(null);
+                } else {
+                    last = null;
                 }
             } else if(last.getId()==node.getId()){
                 last = last.getPrev();

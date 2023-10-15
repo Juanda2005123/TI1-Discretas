@@ -34,8 +34,8 @@ public class Task implements Comparable{
     }
     
     // The `public Task(Task newTask)` constructor is creating a new `Task` object by copying the
-    // values from another `Task` object (`newTask`). It sets the `title`, `priority`, `deadLine`, and
-    // `description` fields of the new `Task` object to the corresponding values of the `newTask`
+    // values from another `Task` object (`newTask`). It sets the `title`, `priority`, `deadLine`,
+    // `description`, and `id` fields of the new `Task` object to the corresponding values of the `newTask`
     // object. It also sets the `imgSrc` field to "/img/edit.png" and calls the `setPriorityNum()`
     // method to set the `priorityNum` field based on the `priority` value.
     public Task(Task newTask){
@@ -43,6 +43,7 @@ public class Task implements Comparable{
         this.priority = newTask.getPriority();
         this.deadLine = newTask.getDeadLine();
         this.description = newTask.getDescription();
+        this.id = newTask.getId();
         imgSrc = ("/img/edit.png");
         setPriorityNum();
     }
