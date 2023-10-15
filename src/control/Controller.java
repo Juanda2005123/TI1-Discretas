@@ -61,6 +61,9 @@ public class Controller implements Initializable{
     private int tasksId;
    
 
+   
+    // The above code is defining a Java class called "Controller". Inside the constructor of the
+    // class, it initializes several data structures for managing tasks.
     public Controller(){
         //Tasks
         tasks = new HashTable<>();
@@ -75,6 +78,14 @@ public class Controller implements Initializable{
         
     }
     
+   /**
+    * The `undoAction` function is used to undo the last action performed by popping the last action
+    * from the `undoData` stack and performing the appropriate action based on the type of data stored
+    * in the action.
+    * 
+    * @param event The event parameter is an ActionEvent object that represents the action that
+    * triggered the undoAction method.
+    */
     @FXML
     public void undoAction(ActionEvent event) {
         try {
@@ -112,6 +123,16 @@ public class Controller implements Initializable{
         }
     }
     
+    /**
+     * The function handles the editing of a task by creating an undo data object, pushing it onto a
+     * stack, modifying the task in data structures, and filtering the tasks.
+     * 
+     * @param task The "task" parameter represents the updated version of the task that needs to be
+     * edited.
+     * @param oldOne The "oldOne" parameter is the original version of the task that is being edited.
+     * It is used to compare the changes made to the task and update any relevant data structures or
+     * filters.
+     */
     public void handleTaskEdit(Task task, Task oldOne){
         Trio trio =  new Trio(task, oldOne);
         Undo data = new Undo(trio, DataType.MODIFY);
@@ -122,12 +143,25 @@ public class Controller implements Initializable{
         filterTasksInside();
     }
 
+    /**
+     * The function "handleTaskEditUndo" modifies a task and filters tasks inside a data structure.
+     * 
+     * @param task The task parameter represents the updated version of the task that needs to be
+     * edited.
+     * @param oldOne The old version of the task that needs to be undone.
+     */
     public void handleTaskEditUndo(Task task, Task oldOne){
                             
         modifyTaskToStructures(task, oldOne);
         filterTasksInside();
     }
     
+    /**
+     * The function handles the deletion of a task by creating an undo data object, removing the task
+     * from data structures, and filtering the remaining tasks.
+     * 
+     * @param task The task object that needs to be deleted.
+     */
     public void handleTaskDelete(Task task) {
         Undo data = new Undo(task, DataType.DELETE);
         undoData.push(data);
@@ -136,12 +170,23 @@ public class Controller implements Initializable{
         filterTasksInside();
     }
 
+   /**
+    * The function handles the deletion and undoing of a task by removing it from data structures and
+    * filtering the remaining tasks.
+    * 
+    * @param task The task object that needs to be deleted and undone.
+    */
     public void handleTaskDeleteUndo(Task task) {
         
         removeTaskToStructures(task);
         filterTasksInside();
     }
 
+    /**
+     * The addTaskUndo function adds a new task to a data structure and then filters the tasks inside.
+     * 
+     * @param newTask The new task that needs to be added to the structures.
+     */
     public void addTaskUndo(Task newTask){
         
         addTaskToStructures(newTask);
@@ -151,11 +196,27 @@ public class Controller implements Initializable{
     }
 
 
+    /**
+     * The initialize function is called when the controller is initialized and can be used to set up
+     * initial values or perform any necessary setup tasks.
+     * 
+     * @param location The location parameter represents the URL of the FXML file that is being loaded.
+     * It specifies the location of the FXML file on the file system or on the web.
+     * @param resources The ResourceBundle object that contains the resources for the specified
+     * location. These resources can be used to localize the application.
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
     }
     
+    /**
+     * The addTaskAction function opens a new window for adding a new task, retrieves the task
+     * information from the window, assigns an ID to the task, adds the task to data structures,
+     * filters the tasks, and adds an undo data entry.
+     * 
+     * @param event The event that triggered the action, such as a button click.
+     */
     @FXML
     public void addTaskAction(ActionEvent event) {
         
@@ -194,6 +255,10 @@ public class Controller implements Initializable{
         
     }
     
+    /**
+     * The function clears the tasks layout and then organizes the tasks either by deadline or by
+     * priority.
+     */
     private void filterTasksInside(){
         try{
             tasksLayout.getChildren().clear();
@@ -213,6 +278,13 @@ public class Controller implements Initializable{
         
     }
     
+   /**
+    * The function filters and organizes tasks based on either deadline or priority.
+    * 
+    * @param event The event parameter is an ActionEvent object that represents the event that
+    * triggered the method call. It contains information about the event, such as the source of the
+    * event and any additional data associated with it.
+    */
     @FXML
     public void filterTasks(ActionEvent event){
     
@@ -234,6 +306,9 @@ public class Controller implements Initializable{
         }
     }
     
+    /**
+     * The function organizes tasks by priority and displays them in a JavaFX layout.
+     */
     private void organizeByPriority() throws IOException{
         try{
             tasksLayout.getChildren().clear();
@@ -256,6 +331,9 @@ public class Controller implements Initializable{
             
     }
     
+    /**
+     * The function organizes tasks by their deadline and displays them in a priority queue.
+     */
     private void organizeByDeadLine() throws IOException{
         try{
             tasksLayout.getChildren().clear();
@@ -277,6 +355,13 @@ public class Controller implements Initializable{
         
             
     }
+/**
+ * This function finishes a priority task by removing it from various data structures and updating the
+ * UI.
+ * 
+ * @param event The event parameter is an ActionEvent object that represents the event that triggered
+ * the method.
+ */
 
     @FXML
     private void finishPriorityTask(ActionEvent event) {
@@ -312,6 +397,13 @@ public class Controller implements Initializable{
 
     }
 
+   /**
+    * This function removes and completes a non-priority task from various data structures and adds it
+    * to an undo stack.
+    * 
+    * @param event The event parameter is an ActionEvent object that represents the event that
+    * triggered the method. It is typically used to handle user interactions, such as button clicks.
+    */
     @FXML
     private void finishNonPriorityTask(ActionEvent event) {
         try{
@@ -341,6 +433,11 @@ public class Controller implements Initializable{
         
         
     }
+    /**
+     * The function adds a task to various data structures based on its priority and deadline.
+     * 
+     * @param task The "task" parameter is an object of the Task class.
+     */
     
     private void addTaskToStructures(Task task){
         tasks.add(task);//HashTable
@@ -359,6 +456,11 @@ public class Controller implements Initializable{
         }
 
     }
+    /**
+     * The function removes a task from various data structures and handles exceptions.
+     * 
+     * @param task The task object that needs to be removed from the data structures.
+     */
     
     public void removeTaskToStructures(Task task){
         try {
@@ -379,6 +481,14 @@ public class Controller implements Initializable{
                 
     }
     
+    /**
+     * The function modifies a task by updating it in a hash table, modifying its priority in a
+     * priority queue, modifying its deadline in a binary search tree, and updating its completion
+     * status in a queue.
+     * 
+     * @param task The task object that needs to be modified and updated in the data structures.
+     * @param oldOne The old task that needs to be modified.
+     */
     public void modifyTaskToStructures(Task task, Task oldOne){
         try {
                      

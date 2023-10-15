@@ -2,14 +2,6 @@
   <library name="javafx">
     <CLASSES />
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Java/src.zip!/javafx.base" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Java/src.zip!/javafx.controls" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Java/src.zip!/javafx.fxml" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Java/src.zip!/javafx.graphics" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Java/src.zip!/javafx.media" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Java/src.zip!/javafx.swing" />
-      <root url="jar://$PROJECT_DIR$/../../../../../../../Java/src.zip!/javafx.web" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

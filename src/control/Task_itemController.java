@@ -55,6 +55,11 @@ public class Task_itemController implements Initializable {
     private Controller parent;
     
     
+    /**
+     * The function sets the parent controller for an object.
+     * 
+     * @param p The parameter "p" is of type "Controller" and represents the parent controller object.
+     */
     public void setParent(Controller p){
         this.parent = p;
     }
@@ -67,6 +72,13 @@ public class Task_itemController implements Initializable {
         
     }    
     
+    /**
+     * The function initializes the attributes of a task by setting the image, title, priority, and
+     * deadline.
+     * 
+     * @param taskito The parameter "taskito" is of type "Task", which is an object representing a
+     * task.
+     */
     public void initAttributes(Task taskito){
         
         this.task = taskito;
@@ -82,6 +94,12 @@ public class Task_itemController implements Initializable {
         
     }
 
+    /**
+     * This function opens a new window for editing a task and updates the task's information in the
+     * main window.
+     * 
+     * @param event The event that triggered the method, typically a button click or key press event.
+     */
     @FXML
     private void editTask(ActionEvent event){ 
         try{
@@ -143,6 +161,11 @@ public class Task_itemController implements Initializable {
     }
 
     
+    /**
+     * The function "getTask" returns the task object.
+     * 
+     * @return The method is returning a Task object.
+     */
     public Task getTask(){
         return task;
     }
