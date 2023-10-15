@@ -14,6 +14,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.PriorityLevel;
@@ -39,7 +40,7 @@ public class NewModifyTaskController implements Initializable {
     @FXML
     private TextField title;
     @FXML
-    private TextField description;
+    private TextArea description;
     @FXML
     private Button submitButton;
     
@@ -51,7 +52,7 @@ public class NewModifyTaskController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         
         priorityChoiceBox.getItems().addAll(options);
-        
+        description.setWrapText(true);
     }    
     
     public void initAttributes(Task taskito){

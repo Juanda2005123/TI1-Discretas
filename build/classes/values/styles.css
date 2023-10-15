@@ -35,3 +35,13 @@
 .text-color{
     -fx-text-fill: #e1e1e1;
 }
+
+.input-Background-Color{
+    -fx-background-color: #212121;
+    -fx-effect: dropshadow(three-pass-box, #000000, 5, 0, 0, 0);
+    -fx-control-inner-background: #212121;
+    
+    
+    
+}
+

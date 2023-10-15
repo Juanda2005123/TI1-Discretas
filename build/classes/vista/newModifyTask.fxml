@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -65,15 +66,18 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="250.0" prefWidth="500.0" spacing="70.0" styleClass="light-black-background" stylesheets="@../values/styles.css">
                <children>
-                  <TextField fx:id="description" alignment="TOP_LEFT" prefHeight="200.0" prefWidth="430.0" promptText="Description" stylesheets="@../values/styles.css">
+                  <TextArea fx:id="description" prefHeight="250.0" prefWidth="400.0" promptText="Description" stylesheets="@../values/styles.css">
                      <font>
-                        <Font name="Open Sans Regular" size="18.0" />
+                        <Font size="18.0" />
                      </font>
+                     <HBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </HBox.margin>
                      <styleClass>
-                        <String fx:value="light-black-background" />
                         <String fx:value="text-color" />
+                        <String fx:value="input-Background-Color" />
                      </styleClass>
-                  </TextField>
+                  </TextArea>
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">

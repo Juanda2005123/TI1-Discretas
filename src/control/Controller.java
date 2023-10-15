@@ -24,7 +24,6 @@ import model.PriorityLevel;
 import model.Task;
 import model.Trio;
 import model.Undo;
-import util.DoubleLinkedNode;
 import util.FifoLinkedList;
 import util.Stack;
 
@@ -81,25 +80,26 @@ public class Controller implements Initializable{
     public void undoAction(ActionEvent event) {
         Undo temp = undoData.pop();
         if(temp != null){
-            if(temp.getDataType() == DataType.DELETE){
-
-                Task task = (Task) temp.getData();
-                addTaskUndo(task);
-            }
-            
-            if(temp.getDataType() == DataType.MODIFY){
-                Trio trio = (Trio) temp.getData();
-                Task newTask = (Task) trio.getNewTask();
-                Task oddTask = (Task) trio.getOddTask();
-                
-                handleTaskEditUndo(oddTask, newTask);
-            }
-            
-            if(temp.getDataType() == DataType.ADD){
-                Task task = (Task)temp.getData();
-                
-                
-                handleTaskDeleteUndo(task);
+            if(null != temp.getDataType())switch (temp.getDataType()) {
+                case DELETE:{
+                    Task task = (Task) temp.getData();
+                    addTaskUndo(task);
+                        break;
+                    }
+                case MODIFY:
+                    Trio trio = (Trio) temp.getData();
+                    Task newTask = (Task) trio.getNewTask();
+                    Task oddTask = (Task) trio.getOddTask();
+                    
+                    handleTaskEditUndo(oddTask, newTask);
+                        break;
+                case ADD:{
+                    Task task = (Task)temp.getData();
+                    handleTaskDeleteUndo(task);
+                        break;
+                    }
+                default:
+                    break;
             }
             
         }
@@ -116,6 +116,7 @@ public class Controller implements Initializable{
     }
 
     public void handleTaskEditUndo(Task task, Task oldOne){
+                            
         modifyTaskToStructures(task, oldOne);
         filterTasksInside();
     }
@@ -165,11 +166,13 @@ public class Controller implements Initializable{
             stage.showAndWait();
             
             Task newTask = controllerAdd.getTask();
-            newTask.setId(tasksId);
-            tasksId++;
+            
             
             if(newTask != null){
                                
+                newTask.setId(tasksId);
+                tasksId++;
+                
                 addTaskToStructures(newTask);
                 filterTasksInside();
                 Undo data = new Undo(newTask, DataType.ADD);
@@ -288,7 +291,10 @@ public class Controller implements Initializable{
                 //Complete tasks
                 completeNonPriorityTask.remove(task);
                 //REMOVE IN STRUCTURES
-
+                
+                Undo data = new Undo(task, DataType.DELETE);
+                undoData.push(data);
+                
                 filterTasksInside();
             }
         } catch(EmptyListException e){
@@ -314,6 +320,9 @@ public class Controller implements Initializable{
             //show tasks
             showByDeadLine.removeDeadLine(task);
             //REMOVE IN STRUCTURES
+            
+            Undo data = new Undo(task, DataType.DELETE);
+            undoData.push(data);
             
             filterTasksInside();
             
@@ -367,6 +376,7 @@ public class Controller implements Initializable{
     
     public void modifyTaskToStructures(Task task, Task oldOne){
         try {
+                     
             tasks.modify(task);//HashTable
             
             //Show and complete tasks
@@ -383,6 +393,8 @@ public class Controller implements Initializable{
                     completeNonPriorityTask.remove(task);
                 }
                 
+            } else if(task.getPriority()==PriorityLevel.NON){
+                completeNonPriorityTask.enqueue(task);
             }
         } catch(EmptyListException e){
             e.printStackTrace();
