@@ -238,7 +238,6 @@ public class Controller implements Initializable{
         try{
             tasksLayout.getChildren().clear();
                 PriorityQueue p = new PriorityQueue(showANDCompleteByPriority);
-                System.out.println(showANDCompleteByPriority.getSize());
                 while(p.getSize()>=0){
                     FXMLLoader fxmlLoader = new FXMLLoader();
                     fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));
@@ -261,7 +260,6 @@ public class Controller implements Initializable{
         try{
             tasksLayout.getChildren().clear();
             PriorityQueue p = new PriorityQueue(showByDeadLine);
-            System.out.println(p.getSize());
             while(p.getSize()>=0){
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("/vista/task_item.fxml"));

@@ -3,32 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/test/util/FifoLinkedListTest.java</file>
-            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/src/ui/IntegradoraDiscretas1.java</file>
-            <file>file:/C:/Users/Compumax/Desktop/TI1-Discretas/test/util/PriorityQueueTest.java</file>
-=======
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/img/edit.png</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/model/Trio.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/util/PriorityQueue.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/model/Undo.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/control/DeleteAlertController.java</file>
             <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/control/Controller.java</file>
             <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/model/Task.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/model/DataType.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/util/DoubleLinkedNode.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/control/NewModifyTaskController.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/exceptions/EmptyListException.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/util/FifoLinkedList.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/test/util/PriorityQueueTest.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/model/PriorityLevel.java</file>
             <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/ui/IntegradoraDiscretas1.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/util/HashTable.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/test/util/StackTest.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/util/Stack.java</file>
             <file>file:/C:/Users/User/Desktop/TI1-Discretas/src/control/Task_itemController.java</file>
-            <file>file:/C:/Users/User/Desktop/TI1-Discretas/test/util/HashTableTest.java</file>
->>>>>>> Feature/FinishFx
         </group>
     </open-files>
 </project-private>
